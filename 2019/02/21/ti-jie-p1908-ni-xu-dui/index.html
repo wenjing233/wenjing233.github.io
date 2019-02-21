@@ -5,7 +5,10 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
     <meta name="keywords" content="题解 P1908 【逆序对】, wenjing233的小站">
-    <meta name="description" content="题解 P1908 【逆序对】 | wenjing233的小站">
+    <meta name="description" content="离散化多麻烦啊，还不如动态开点代码解释在注释里QAQ
+//思路：运用权值动态开点线段树从后往前扫每次加上比自己小的且编号靠后的点的个数的贡献（由于从后往前扫可以无视编号）
+空间&amp;amp;时间：nlogn
+#include &amp;lt;bits/">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -302,12 +305,33 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/题解/" target="_blank">
+                                <span class="chip bg-color">题解</span>
+                            </a>
+                        
+                            <a href="/tags/luogu/" target="_blank">
+                                <span class="chip bg-color">luogu</span>
+                            </a>
+                        
+                            <a href="/tags/线段树/" target="_blank">
+                                <span class="chip bg-color">线段树</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/题解/" class="post-category" target="_blank">
+                                题解
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -322,7 +346,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        0
+                        398
                     </div>
                     
 
@@ -345,7 +369,58 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <p>离散化多麻烦啊，还不如动态开点<br>代码解释在注释里QAQ</p>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//思路：运用权值动态开点线段树从后往前扫每次加上比自己小的且编号靠后的点的个数的贡献（由于从后往前扫可以无视编号）</span>
+空间<span class="token operator">&amp;</span>时间：nlogn
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token keyword">int</span> sum<span class="token punctuation">[</span><span class="token number">7000009</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//当前区间的点的个数和</span>
+<span class="token keyword">int</span> lson<span class="token punctuation">[</span><span class="token number">7000009</span><span class="token punctuation">]</span><span class="token punctuation">,</span>rson<span class="token punctuation">[</span><span class="token number">7000009</span><span class="token punctuation">]</span><span class="token punctuation">,</span>bh<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//左儿子，右儿子，当前点的个数</span>
+<span class="token keyword">long</span> <span class="token keyword">long</span> ans<span class="token punctuation">;</span>
+<span class="token keyword">int</span> num<span class="token punctuation">[</span><span class="token number">500009</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> n<span class="token punctuation">;</span>
+<span class="token keyword">long</span> <span class="token keyword">long</span> <span class="token function">query</span><span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span> now<span class="token punctuation">,</span><span class="token keyword">long</span> <span class="token keyword">long</span> k<span class="token punctuation">,</span><span class="token keyword">long</span> <span class="token keyword">long</span> l<span class="token punctuation">,</span><span class="token keyword">long</span> <span class="token keyword">long</span> r<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>now<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//如果当前点不存在，即当前区间内没有点存在</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>l<span class="token operator">==</span>r<span class="token punctuation">)</span> <span class="token keyword">return</span> sum<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//特判</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>l<span class="token operator">>=</span>r<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//特判</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>k<span class="token operator">&lt;=</span><span class="token punctuation">(</span>l<span class="token operator">+</span>r<span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token function">query</span><span class="token punctuation">(</span>lson<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token punctuation">,</span>k<span class="token punctuation">,</span>l<span class="token punctuation">,</span><span class="token punctuation">(</span>l<span class="token operator">+</span>r<span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//继续向左</span>
+    <span class="token keyword">else</span> <span class="token keyword">return</span> sum<span class="token punctuation">[</span>lson<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">+</span><span class="token function">query</span><span class="token punctuation">(</span>rson<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token punctuation">,</span>k<span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token punctuation">(</span>l<span class="token operator">+</span>r<span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//向右的同时将左边的贡献加上去</span>
+<span class="token punctuation">}</span> 
+<span class="token keyword">void</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span> now<span class="token punctuation">,</span><span class="token keyword">long</span> <span class="token keyword">long</span> k<span class="token punctuation">,</span><span class="token keyword">long</span> <span class="token keyword">long</span> l<span class="token punctuation">,</span><span class="token keyword">long</span> <span class="token keyword">long</span> r<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>l<span class="token operator">==</span>r<span class="token punctuation">)</span> sum<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//特判</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>l<span class="token operator">>=</span>r<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//特判</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>k<span class="token operator">&lt;=</span><span class="token punctuation">(</span><span class="token punctuation">(</span>l<span class="token operator">+</span>r<span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>lson<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token punctuation">)</span> lson<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token operator">=</span><span class="token operator">++</span>bh<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//如果没有左儿子，那就造一个</span>
+        <span class="token function">add</span><span class="token punctuation">(</span>lson<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token punctuation">,</span>k<span class="token punctuation">,</span>l<span class="token punctuation">,</span><span class="token punctuation">(</span>l<span class="token operator">+</span>r<span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>rson<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token punctuation">)</span> rson<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token operator">=</span><span class="token operator">++</span>bh<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//如果没有右儿子也造一个</span>
+        <span class="token function">add</span><span class="token punctuation">(</span>rson<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token punctuation">,</span>k<span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token punctuation">(</span>l<span class="token operator">+</span>r<span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    sum<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token operator">=</span>sum<span class="token punctuation">[</span>lson<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">+</span>sum<span class="token punctuation">[</span>rson<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//更新贡献</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span> i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">&lt;=</span>n<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>num<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span> i<span class="token operator">=</span>n<span class="token punctuation">;</span>i<span class="token operator">>=</span><span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">--</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        ans<span class="token operator">+</span><span class="token operator">=</span><span class="token function">query</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>num<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1000000000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>num<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1000000000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%lld"</span><span class="token punctuation">,</span>ans<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>最后祝大家NOIP2018RP++（如果管理员能够在复赛前审核完的话）</p>
+
             </div>
             <hr>
 
@@ -448,20 +523,43 @@ gitment.render('gitment-content');
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary"></div>
+                    <div class="summary">离散化多麻烦啊，还不如动态开点代码解释在注释里QAQ
+//思路：运用权值动态开点线段树从后往前扫每次加上比自己小的且编号靠后的点的个数的贡献（由于从后往前扫可以无视编号）
+空间&amp;时间：nlogn
+#include &lt;bits/</div>
                     <div class="publish-info">
                             <span class="publish-date">
                                 <i class="fa fa-clock-o fa-fw icon-date"></i>2019-02-21
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-user fa-fw"></i>
-                            wenjing233
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/题解/" class="post-category" target="_blank">
+                                    题解
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/题解/" target="_blank">
+                        <span class="chip bg-color">题解</span>
+                    </a>
+                    
+                    <a href="/tags/luogu/" target="_blank">
+                        <span class="chip bg-color">luogu</span>
+                    </a>
+                    
+                    <a href="/tags/线段树/" target="_blank">
+                        <span class="chip bg-color">线段树</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -482,18 +580,48 @@ gitment.render('gitment-content');
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary"></div>
+                    <div class="summary">这么好（shui）的题目怎么能不上随机化搜索呢//思路：随机化搜索+贪心（从今年D1可以看出贪心是多么重要的能力（然而D1AK也救不了我D2爆炸QAQ（事实证明D2还是多打暴力为上策）））
+//每次以一定的概率进行贪心选择或随机选择
+//贪</div>
                     <div class="publish-info">
                             <span class="publish-date">
                                 <i class="fa fa-clock-o fa-fw icon-date"></i>2019-02-21
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-user fa-fw"></i>
-                            wenjing233
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/题解/" class="post-category" target="_blank">
+                                    题解
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/题解/" target="_blank">
+                        <span class="chip bg-color">题解</span>
+                    </a>
+                    
+                    <a href="/tags/luogu/" target="_blank">
+                        <span class="chip bg-color">luogu</span>
+                    </a>
+                    
+                    <a href="/tags/非正解做法/" target="_blank">
+                        <span class="chip bg-color">非正解做法</span>
+                    </a>
+                    
+                    <a href="/tags/随机化搜索/" target="_blank">
+                        <span class="chip bg-color">随机化搜索</span>
+                    </a>
+                    
+                    <a href="/tags/贪心/" target="_blank">
+                        <span class="chip bg-color">贪心</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -555,7 +683,7 @@ gitment.render('gitment-content');
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">1.1k</span>
+                <span class="white-color">12.6k</span>
             
 
             
