@@ -4,6 +4,39 @@
   
     
     <entry>
+      <title>POJ 1328 题解&amp;区间选取问题</title>
+      <link href="/2019/03/01/poj-1328-ti-jie-qu-jian-xuan-qu-wen-ti/"/>
+      <url>/2019/03/01/poj-1328-ti-jie-qu-jian-xuan-qu-wen-ti/</url>
+      
+        <content type="html"><![CDATA[<h3 id="题意转化"><a href="#题意转化" class="headerlink" title="题意转化"></a>题意转化</h3><p>将题目反过来看，对于每个建筑，能观察到它的检测器要么不存在，要么就存在于一个区间之中，即最后的问题变为区间选取问题</p><h3 id="区间选取问题"><a href="#区间选取问题" class="headerlink" title="区间选取问题"></a>区间选取问题</h3><p>最优策略为将一个点尽可能的向右移动知道达到一个区间的右端点，因为每个区间内至少有一个点，二这个点尽可能往右能覆盖更多的点（前提是这个点没有超过当前所覆盖的区间的任意一个右端点），因为每次离开一个区间，意味着最后还要放回去一个点，显然是不优或等价的。</p><pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span><span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span><span class="token keyword">inline</span> <span class="token keyword">void</span> <span class="token function">read</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">&amp;</span>x<span class="token punctuation">)</span><span class="token punctuation">{</span>    x<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span><span class="token keyword">int</span> f<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token keyword">char</span> c<span class="token operator">=</span><span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token keyword">while</span><span class="token punctuation">(</span>c<span class="token operator">&lt;</span><span class="token string">'0'</span><span class="token operator">||</span>c<span class="token operator">></span><span class="token string">'9'</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">if</span><span class="token punctuation">(</span>c<span class="token operator">==</span><span class="token string">'-'</span><span class="token punctuation">)</span> f<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> c<span class="token operator">=</span><span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>    <span class="token keyword">while</span><span class="token punctuation">(</span>c<span class="token operator">&lt;=</span><span class="token string">'9'</span><span class="token operator">&amp;&amp;</span>c<span class="token operator">>=</span><span class="token string">'0'</span><span class="token punctuation">)</span><span class="token punctuation">{</span>x<span class="token operator">=</span><span class="token punctuation">(</span>x<span class="token operator">&lt;&lt;</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token punctuation">(</span>x<span class="token operator">&lt;&lt;</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token punctuation">(</span>c<span class="token operator">^</span><span class="token number">48</span><span class="token punctuation">)</span><span class="token punctuation">;</span>c<span class="token operator">=</span><span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>    x<span class="token operator">*</span><span class="token operator">=</span>f<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">inline</span> <span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token keyword">if</span><span class="token punctuation">(</span>x<span class="token operator">&lt;</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>x<span class="token operator">=</span><span class="token operator">-</span>x<span class="token punctuation">;</span><span class="token function">putchar</span><span class="token punctuation">(</span><span class="token string">'-'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>    <span class="token keyword">if</span><span class="token punctuation">(</span>x<span class="token operator">></span><span class="token number">9</span><span class="token punctuation">)</span> <span class="token function">print</span><span class="token punctuation">(</span>x<span class="token operator">/</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token function">putchar</span><span class="token punctuation">(</span>x<span class="token operator">%</span><span class="token number">10</span><span class="token operator">+</span><span class="token string">'0'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">int</span> n<span class="token punctuation">,</span>radii<span class="token punctuation">;</span><span class="token keyword">struct</span> radar<span class="token punctuation">{</span>    <span class="token keyword">double</span> l<span class="token punctuation">,</span>r<span class="token punctuation">;</span><span class="token punctuation">}</span>r<span class="token punctuation">[</span><span class="token number">1008</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token keyword">inline</span> <span class="token keyword">bool</span> <span class="token function">rmp</span><span class="token punctuation">(</span>radar a<span class="token punctuation">,</span>radar b<span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token keyword">if</span><span class="token punctuation">(</span>a<span class="token punctuation">.</span>l<span class="token operator">==</span>b<span class="token punctuation">.</span>l<span class="token punctuation">)</span> <span class="token keyword">return</span> a<span class="token punctuation">.</span>r<span class="token operator">&lt;</span>b<span class="token punctuation">.</span>r<span class="token punctuation">;</span>    <span class="token keyword">return</span> a<span class="token punctuation">.</span>l<span class="token operator">&lt;</span>b<span class="token punctuation">.</span>l<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">int</span> fstn<span class="token punctuation">,</span>fstr<span class="token punctuation">;</span><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token keyword">int</span> gg<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token operator">~</span><span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>n<span class="token punctuation">,</span><span class="token operator">&amp;</span>radii<span class="token punctuation">)</span><span class="token operator">&amp;&amp;</span>n<span class="token operator">&amp;&amp;</span>radii<span class="token punctuation">)</span>    <span class="token punctuation">{</span>        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>gg<span class="token punctuation">)</span> fstn<span class="token operator">=</span>n<span class="token punctuation">,</span>fstr<span class="token operator">=</span>radii<span class="token punctuation">;</span>        <span class="token keyword">int</span> maxy<span class="token operator">=</span><span class="token operator">-</span><span class="token number">0x3f3f3f3f</span><span class="token punctuation">;</span>        <span class="token keyword">int</span> tot<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>a<span class="token punctuation">,</span>b<span class="token punctuation">;</span>        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">&lt;=</span>n<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>         <span class="token punctuation">{</span>            <span class="token function">read</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token function">read</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>            maxy<span class="token operator">=</span><span class="token function">max</span><span class="token punctuation">(</span>maxy<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>            r<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>l<span class="token operator">=</span>a<span class="token operator">*</span><span class="token number">1.0</span><span class="token operator">-</span><span class="token function">sqrt</span><span class="token punctuation">(</span>radii<span class="token operator">*</span>radii<span class="token operator">-</span>b<span class="token operator">*</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>            r<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>r<span class="token operator">=</span>a<span class="token operator">*</span><span class="token number">1.0</span><span class="token operator">+</span><span class="token function">sqrt</span><span class="token punctuation">(</span>radii<span class="token operator">*</span>radii<span class="token operator">-</span>b<span class="token operator">*</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token punctuation">}</span>        <span class="token keyword">if</span><span class="token punctuation">(</span>maxy<span class="token operator">&lt;=</span>radii<span class="token punctuation">)</span>         <span class="token punctuation">{</span>            <span class="token function">sort</span><span class="token punctuation">(</span>r<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>r<span class="token operator">+</span>n<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>rmp<span class="token punctuation">)</span><span class="token punctuation">;</span>            <span class="token keyword">double</span> ll<span class="token operator">=</span>r<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>l<span class="token punctuation">,</span>rr<span class="token operator">=</span>r<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>r<span class="token punctuation">;</span>tot<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>            <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span>i<span class="token operator">&lt;=</span>n<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>            <span class="token punctuation">{</span>                <span class="token keyword">if</span><span class="token punctuation">(</span>rr<span class="token operator">>=</span>r<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>l<span class="token operator">&amp;&amp;</span>rr<span class="token operator">&lt;=</span>r<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>r<span class="token punctuation">)</span>                 <span class="token punctuation">{</span>                    ll<span class="token operator">=</span>r<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>l<span class="token punctuation">;</span>                <span class="token punctuation">}</span>                <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>rr<span class="token operator">></span>r<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>r<span class="token operator">&amp;&amp;</span>ll<span class="token operator">&lt;=</span>r<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>r<span class="token punctuation">)</span>                <span class="token punctuation">{</span>                    ll<span class="token operator">=</span>r<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>l<span class="token punctuation">;</span>                    rr<span class="token operator">=</span>r<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>r<span class="token punctuation">;</span>                <span class="token punctuation">}</span>                <span class="token keyword">else</span>                <span class="token punctuation">{</span>                    tot<span class="token operator">++</span><span class="token punctuation">;</span>rr<span class="token operator">=</span>r<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>r<span class="token punctuation">;</span>                <span class="token punctuation">}</span>            <span class="token punctuation">}</span>        <span class="token punctuation">}</span>        <span class="token keyword">else</span> tot<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>        gg<span class="token operator">++</span><span class="token punctuation">;</span>        <span class="token keyword">if</span><span class="token punctuation">(</span>fstn<span class="token operator">==</span><span class="token number">3</span><span class="token operator">&amp;&amp;</span>fstr<span class="token operator">==</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Case %d: %d\n"</span><span class="token punctuation">,</span>gg<span class="token punctuation">,</span>tot<span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token keyword">else</span>  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span>tot<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> poj </tag>
+            
+            <tag> 贪心 </tag>
+            
+            <tag> 平面几何 </tag>
+            
+            <tag> 问题转化 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>均分纸牌(luogu1031)糖果传递(luogu2512)七夕会(bzoj3032)三合一题解</title>
       <link href="/2019/02/28/jun-fen-zhi-pai-luogu1031-tang-guo-chuan-di-luogu2512-qi-xi-hui-bzoj3032-san-he-yi-ti-jie/"/>
       <url>/2019/02/28/jun-fen-zhi-pai-luogu1031-tang-guo-chuan-di-luogu2512-qi-xi-hui-bzoj3032-san-he-yi-ti-jie/</url>
@@ -22,13 +55,13 @@
             
             <tag> 题解 </tag>
             
+            <tag> 问题转化 </tag>
+            
             <tag> luogu </tag>
             
             <tag> bzoj </tag>
             
             <tag> 数论 </tag>
-            
-            <tag> 问题转化 </tag>
             
         </tags>
       
@@ -154,13 +187,13 @@
             
             <tag> 题解 </tag>
             
+            <tag> 贪心 </tag>
+            
             <tag> luogu </tag>
             
             <tag> 非正解做法 </tag>
             
             <tag> 随机化搜索 </tag>
-            
-            <tag> 贪心 </tag>
             
         </tags>
       
@@ -341,31 +374,6 @@
     
     
     <entry>
-      <title>hello world</title>
-      <link href="/2019/02/21/hello-world/"/>
-      <url>/2019/02/21/hello-world/</url>
-      
-        <content type="html"><![CDATA[<p>博客可以用了！欢迎交换友链！</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 生活记录 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 杂七杂八的 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>2019.2.18总结</title>
       <link href="/2019/02/21/2019-2-18-zong-jie/"/>
       <url>/2019/02/21/2019-2-18-zong-jie/</url>
@@ -385,6 +393,31 @@
             <tag> 模拟赛总结 </tag>
             
             <tag> hgoi </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>hello world</title>
+      <link href="/2019/02/21/hello-world/"/>
+      <url>/2019/02/21/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>博客可以用了！欢迎交换友链！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 生活记录 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 杂七杂八的 </tag>
             
         </tags>
       
