@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="keywords" content="题解 P4374 【[USACO18OPEN]Disruption】, wenjing233的小站">
     <meta name="description" content="既然没有有图的题解，那我就过来补个图加思路了
-画图假设我们有一颗树图一现在多了一条额外道路图二则当且仅当额外道路所连的两个点不在一个联通块内时，这条边才有贡献，我们将能够将这两个点分开的边标记出来图三发现这些边构成的路径就是两点之间的最短简">
+画图假设我们有一颗树现在多了一条额外道路则当且仅当额外道路所连的两个点不在一个联通块内时，这条边才有贡献，我们将能够将这两个点分开的边标记出来发现这些边构成的路径就是两点之间的最短简单路径，直接">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -352,7 +352,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        990
+                        1k
                     </div>
                     
 
@@ -376,7 +376,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>既然没有有图的题解，那我就过来补个图加思路了</p>
-<h3 id="画图"><a href="#画图" class="headerlink" title="画图"></a>画图</h3><p>假设我们有一颗树<br>图一<br>现在多了一条额外道路<br>图二<br>则当且仅当额外道路所连的两个点不在一个联通块内时，这条边才有贡献，我们将能够将这两个点分开的边标记出来<br>图三<br>发现这些边构成的路径就是两点之间的最短简单路径，直接用树剖维护区间极值即可</p>
+<h3 id="画图"><a href="#画图" class="headerlink" title="画图"></a>画图</h3><p>假设我们有一颗树<br><img src="https://i.loli.net/2019/03/06/5c7f0e0adb762.png" alt><br>现在多了一条额外道路<br><img src="https://i.loli.net/2019/03/06/5c7f0e497d85c.png" alt><br>则当且仅当额外道路所连的两个点不在一个联通块内时，这条边才有贡献，我们将能够将这两个点分开的边标记出来<br><img src="https://i.loli.net/2019/03/06/5c7f0d7dd41c9.png" alt><br>发现这些边构成的路径就是两点之间的最短简单路径，直接用树剖维护区间极值即可<br>（不要问我前两张图为什么那么怪，因为我是由结果改出过程（简称懒））</p>
 <h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><p>两点不在同一个联通快内，即两点之间不存在简单路径，因为这是一棵树，所以两点之间的简单路径是唯一的，只有切断简单路径才能使两个点不在一个联通块内，证毕</p>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h></span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
@@ -596,7 +596,7 @@
                 </a>
                 <div class="card-content article-content">
                     <div class="summary">既然没有有图的题解，那我就过来补个图加思路了
-画图假设我们有一颗树图一现在多了一条额外道路图二则当且仅当额外道路所连的两个点不在一个联通块内时，这条边才有贡献，我们将能够将这两个点分开的边标记出来图三发现这些边构成的路径就是两点之间的最短简</div>
+画图假设我们有一颗树现在多了一条额外道路则当且仅当额外道路所连的两个点不在一个联通块内时，这条边才有贡献，我们将能够将这两个点分开的边标记出来发现这些边构成的路径就是两点之间的最短简单路径，直接</div>
                     <div class="publish-info">
                             <span class="publish-date">
                                 <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-04
