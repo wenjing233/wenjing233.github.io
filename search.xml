@@ -20,9 +20,9 @@
       
         <tags>
             
-            <tag> 题解 </tag>
-            
             <tag> 游记 </tag>
+            
+            <tag> 题解 </tag>
             
             <tag> ACM </tag>
             
@@ -84,9 +84,9 @@
             
             <tag> 题解 </tag>
             
-            <tag> poj </tag>
-            
             <tag> 贪心 </tag>
+            
+            <tag> poj </tag>
             
             <tag> 平面几何 </tag>
             
@@ -117,9 +117,9 @@
             
             <tag> 题解 </tag>
             
-            <tag> 问题转化 </tag>
-            
             <tag> luogu </tag>
+            
+            <tag> 问题转化 </tag>
             
             <tag> bzoj </tag>
             
@@ -249,13 +249,13 @@
             
             <tag> 题解 </tag>
             
-            <tag> 贪心 </tag>
-            
             <tag> luogu </tag>
             
             <tag> 非正解做法 </tag>
             
             <tag> 随机化搜索 </tag>
+            
+            <tag> 贪心 </tag>
             
         </tags>
       
