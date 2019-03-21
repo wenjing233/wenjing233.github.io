@@ -4,11 +4,9 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="题解 P1908 【逆序对】, wenjing233的小站">
-    <meta name="description" content="离散化多麻烦啊，还不如动态开点代码解释在注释里QAQ
-//思路：运用权值动态开点线段树从后往前扫每次加上比自己小的且编号靠后的点的个数的贡献（由于从后往前扫可以无视编号）
-空间&amp;amp;时间：nlogn
-#include &amp;lt;bits/">
+    <meta name="keywords" content="字符串的最小表示法&amp;树的最小表示法学习笔记, wenjing233的小站">
+    <meta name="description" content="本质思想两种算法都是解决同一种问题询问两个东西（我也不知道叫什么了）能否通过某种变换而得到然后实际上可以对他们的所有状态排序，然后找到最小的进行比较，若一样才一样
+字符串的最小表示字符串的循环同构是指：news=s[i……n]+s[1……i">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -16,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>题解 P1908 【逆序对】 | wenjing233的小站</title>
+    <title>字符串的最小表示法&amp;树的最小表示法学习笔记 | wenjing233的小站</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -285,7 +283,7 @@
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        题解 P1908 【逆序对】
+                        字符串的最小表示法&amp;树的最小表示法学习笔记
                     </div>
                 </div>
             </div>
@@ -307,16 +305,16 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/题解/" target="_blank">
-                                <span class="chip bg-color">题解</span>
+                            <a href="/tags/学习笔记/" target="_blank">
+                                <span class="chip bg-color">学习笔记</span>
                             </a>
                         
-                            <a href="/tags/luogu/" target="_blank">
-                                <span class="chip bg-color">luogu</span>
+                            <a href="/tags/树/" target="_blank">
+                                <span class="chip bg-color">树</span>
                             </a>
                         
-                            <a href="/tags/线段树/" target="_blank">
-                                <span class="chip bg-color">线段树</span>
+                            <a href="/tags/字符串/" target="_blank">
+                                <span class="chip bg-color">字符串</span>
                             </a>
                         
                     </div>
@@ -327,8 +325,8 @@
                     <div class="post-cate">
                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/题解/" class="post-category" target="_blank">
-                                题解
+                            <a href="/categories/学习笔记/" class="post-category" target="_blank">
+                                学习笔记
                             </a>
                         
                     </div>
@@ -339,21 +337,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-02-21
+                    2019-03-21
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        398
+                        666
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        2 分
                     </div>
                     
                 
@@ -369,57 +367,29 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>离散化多麻烦啊，还不如动态开点<br>代码解释在注释里QAQ</p>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//思路：运用权值动态开点线段树从后往前扫每次加上比自己小的且编号靠后的点的个数的贡献（由于从后往前扫可以无视编号）</span>
-空间<span class="token operator">&amp;</span>时间：nlogn
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h></span></span>
-<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
-<span class="token keyword">int</span> sum<span class="token punctuation">[</span><span class="token number">7000009</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//当前区间的点的个数和</span>
-<span class="token keyword">int</span> lson<span class="token punctuation">[</span><span class="token number">7000009</span><span class="token punctuation">]</span><span class="token punctuation">,</span>rson<span class="token punctuation">[</span><span class="token number">7000009</span><span class="token punctuation">]</span><span class="token punctuation">,</span>bh<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//左儿子，右儿子，当前点的个数</span>
-<span class="token keyword">long</span> <span class="token keyword">long</span> ans<span class="token punctuation">;</span>
-<span class="token keyword">int</span> num<span class="token punctuation">[</span><span class="token number">500009</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> n<span class="token punctuation">;</span>
-<span class="token keyword">long</span> <span class="token keyword">long</span> <span class="token function">query</span><span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span> now<span class="token punctuation">,</span><span class="token keyword">long</span> <span class="token keyword">long</span> k<span class="token punctuation">,</span><span class="token keyword">long</span> <span class="token keyword">long</span> l<span class="token punctuation">,</span><span class="token keyword">long</span> <span class="token keyword">long</span> r<span class="token punctuation">)</span>
+                <h3 id="本质思想"><a href="#本质思想" class="headerlink" title="本质思想"></a>本质思想</h3><p>两种算法都是解决同一种问题<br>询问两个东西（我也不知道叫什么了）能否通过某种变换而得到<br>然后实际上可以对他们的所有状态排序，然后找到最小的进行比较，若一样才一样</p>
+<h3 id="字符串的最小表示"><a href="#字符串的最小表示" class="headerlink" title="字符串的最小表示"></a>字符串的最小表示</h3><p>字符串的循环同构是指：<br>news=s[i……n]+s[1……i-1]（这里还是要吐槽一下oi wiki这里打错了（当然如果你现在去看发现没什么问题了可能是因为我去修好了XD））<br>现在给你两个字符串让你求出其是否同构<br>现在考虑给定一个字符串，如何求出其最小表示<br>首先考虑给定两个位置i,j，给出一个长度k，如果从i，j开始的字符串一直到i+k,j+k都一样的话，但当前匹配到的字符不同则字符大的那个绝对不是最小表示法，因为必然存在一个字符串比他的字典序小</p>
+<h3 id="核心操作"><a href="#核心操作" class="headerlink" title="核心操作"></a>核心操作</h3><p>将字典序更大的那个点直接跳到 i（j）+k+1的位置<br>接下来解释为什么<br>对于已经匹配的相同的字符串，一定已经是当前字符串中最小的同构方式了<br>假设不是这样<br>给定已匹配的部分为cab 那么在得到这个匹配状态之前肯定存在<br>i在c这个位置，j在a这个位置上的情况，则直接失配，不会存在这样的情况，其他情况以此类推<br>总之就是i(j)到i(j)+k之间没有比i(j)更优的位置<br>这里还要注意一点 i和j重合时，要让其中一个数+1</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//扒的oi wiki的，毕竟众多讲稿中，他的写法最优美</span>
+<span class="token keyword">int</span> k<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>j<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">while</span><span class="token punctuation">(</span>k<span class="token operator">&lt;</span>n<span class="token operator">&amp;&amp;</span>i<span class="token operator">&lt;</span>n<span class="token operator">&amp;&amp;</span>j<span class="token operator">&lt;</span>n<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>now<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//如果当前点不存在，即当前区间内没有点存在</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>l<span class="token operator">==</span>r<span class="token punctuation">)</span> <span class="token keyword">return</span> sum<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//特判</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>l<span class="token operator">>=</span>r<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//特判</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>k<span class="token operator">&lt;=</span><span class="token punctuation">(</span>l<span class="token operator">+</span>r<span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token function">query</span><span class="token punctuation">(</span>lson<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token punctuation">,</span>k<span class="token punctuation">,</span>l<span class="token punctuation">,</span><span class="token punctuation">(</span>l<span class="token operator">+</span>r<span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//继续向左</span>
-    <span class="token keyword">else</span> <span class="token keyword">return</span> sum<span class="token punctuation">[</span>lson<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">+</span><span class="token function">query</span><span class="token punctuation">(</span>rson<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token punctuation">,</span>k<span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token punctuation">(</span>l<span class="token operator">+</span>r<span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//向右的同时将左边的贡献加上去</span>
-<span class="token punctuation">}</span> 
-<span class="token keyword">void</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span> now<span class="token punctuation">,</span><span class="token keyword">long</span> <span class="token keyword">long</span> k<span class="token punctuation">,</span><span class="token keyword">long</span> <span class="token keyword">long</span> l<span class="token punctuation">,</span><span class="token keyword">long</span> <span class="token keyword">long</span> r<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>l<span class="token operator">==</span>r<span class="token punctuation">)</span> sum<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//特判</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>l<span class="token operator">>=</span>r<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//特判</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>k<span class="token operator">&lt;=</span><span class="token punctuation">(</span><span class="token punctuation">(</span>l<span class="token operator">+</span>r<span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
+    <span class="token keyword">if</span><span class="token punctuation">(</span>sec<span class="token punctuation">[</span><span class="token punctuation">(</span>i<span class="token operator">+</span>k<span class="token punctuation">)</span><span class="token operator">%</span>n<span class="token punctuation">]</span><span class="token operator">==</span>sec<span class="token punctuation">[</span><span class="token punctuation">(</span>j<span class="token operator">+</span>k<span class="token punctuation">)</span><span class="token operator">%</span>n<span class="token punctuation">]</span><span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>lson<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token punctuation">)</span> lson<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token operator">=</span><span class="token operator">++</span>bh<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//如果没有左儿子，那就造一个</span>
-        <span class="token function">add</span><span class="token punctuation">(</span>lson<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token punctuation">,</span>k<span class="token punctuation">,</span>l<span class="token punctuation">,</span><span class="token punctuation">(</span>l<span class="token operator">+</span>r<span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
+        k<span class="token operator">++</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
     <span class="token keyword">else</span>
     <span class="token punctuation">{</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>rson<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token punctuation">)</span> rson<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token operator">=</span><span class="token operator">++</span>bh<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//如果没有右儿子也造一个</span>
-        <span class="token function">add</span><span class="token punctuation">(</span>rson<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token punctuation">,</span>k<span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token punctuation">(</span>l<span class="token operator">+</span>r<span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        sec<span class="token punctuation">[</span><span class="token punctuation">(</span>i<span class="token operator">+</span>k<span class="token punctuation">)</span><span class="token operator">%</span>n<span class="token punctuation">]</span><span class="token operator">></span>sec<span class="token punctuation">[</span><span class="token punctuation">(</span>j<span class="token operator">+</span>k<span class="token punctuation">)</span><span class="token operator">%</span>n<span class="token punctuation">]</span><span class="token operator">?</span>i<span class="token operator">=</span>i<span class="token operator">+</span>k<span class="token operator">+</span><span class="token number">1</span><span class="token operator">:</span>j<span class="token operator">=</span>j<span class="token operator">+</span>k<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>i<span class="token operator">==</span>j<span class="token punctuation">)</span> i<span class="token operator">++</span><span class="token punctuation">;</span>
+        k<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-    sum<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token operator">=</span>sum<span class="token punctuation">[</span>lson<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">+</span>sum<span class="token punctuation">[</span>rson<span class="token punctuation">[</span>now<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//更新贡献</span>
 <span class="token punctuation">}</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span> i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">&lt;=</span>n<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>num<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span> i<span class="token operator">=</span>n<span class="token punctuation">;</span>i<span class="token operator">>=</span><span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">--</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        ans<span class="token operator">+</span><span class="token operator">=</span><span class="token function">query</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>num<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1000000000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>num<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1000000000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%lld"</span><span class="token punctuation">,</span>ans<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+i<span class="token operator">=</span><span class="token function">min</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span>j<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<p>最后祝大家NOIP2018RP++（如果管理员能够在复赛前审核完的话）</p>
+<h3 id="树的最小表示法"><a href="#树的最小表示法" class="headerlink" title="树的最小表示法"></a>树的最小表示法</h3><p>树的同构是指，两颗有根树可以通过交换根而变成相同的形态<br>类似的，我们将树也拍成字符串，我们可以想到dfs序，但由于这里每个点都是等价的<br>所以我们可以将dfs序改为01序列入为0出为1<br>直观的，为了使树的01串最小，只要从下到上合并的时候对子树从小到大排序即可<br>代码</p>
+<pre class=" language-cpp"><code class="language-cpp">这么简单还想要代码？（其实是我懒得去扒了）
+</code></pre>
 
             </div>
             <hr>
@@ -443,7 +413,7 @@
                     </span>
                     <a href="http://wenjing233.github.io" class="b-link-green">wenjing233的小站</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/02/21/ti-jie-p1908-ni-xu-dui/" class="b-link-green">题解 P1908 【逆序对】</a>
+                    <a href="/2019/03/21/zi-fu-chuan-de-zui-xiao-biao-shi-fa-shu-de-zui-xiao-biao-shi-fa-xue-xi-bi-ji/" class="b-link-green">字符串的最小表示法&amp;树的最小表示法学习笔记</a>
                 </p>
             </div>
         </div>
@@ -466,61 +436,51 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/02/22/ti-jie-p5155-usaco18dec-balance-beam/">
+                <a href="/2019/03/21/zi-fu-chuan-de-zui-xiao-biao-shi-fa-shu-de-zui-xiao-biao-shi-fa-xue-xi-bi-ji/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="题解 P5155 【[USACO18DEC]Balance Beam】">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="字符串的最小表示法&树的最小表示法学习笔记">
                         
-                        <span class="card-title">题解 P5155 【[USACO18DEC]Balance Beam】</span>
+                        <span class="card-title">字符串的最小表示法&树的最小表示法学习笔记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">分步证明，首先抛出结论：每个点的策略要么是不动，要么是随机移动直到左右两个点中的一个落下。  
-结论1：从点x开始在a和b之间移动在b落下的概率为 (x-a)/(b-a)设概率为f[x]=k,则f[a]=0,f[b]=1。因为x有1/2几率</div>
+                    <div class="summary">本质思想两种算法都是解决同一种问题询问两个东西（我也不知道叫什么了）能否通过某种变换而得到然后实际上可以对他们的所有状态排序，然后找到最小的进行比较，若一样才一样
+字符串的最小表示字符串的循环同构是指：news=s[i……n]+s[1……i</div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-02-22
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-21
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/题解/" class="post-category" target="_blank">
-                                    题解
+                            <a href="/categories/学习笔记/" class="post-category" target="_blank">
+                                    学习笔记
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/题解/" target="_blank">
-                        <span class="chip bg-color">题解</span>
+                    <a href="/tags/学习笔记/" target="_blank">
+                        <span class="chip bg-color">学习笔记</span>
                     </a>
                     
-                    <a href="/tags/luogu/" target="_blank">
-                        <span class="chip bg-color">luogu</span>
+                    <a href="/tags/树/" target="_blank">
+                        <span class="chip bg-color">树</span>
                     </a>
                     
-                    <a href="/tags/数论/" target="_blank">
-                        <span class="chip bg-color">数论</span>
-                    </a>
-                    
-                    <a href="/tags/凸包/" target="_blank">
-                        <span class="chip bg-color">凸包</span>
-                    </a>
-                    
-                    <a href="/tags/证明/" target="_blank">
-                        <span class="chip bg-color">证明</span>
-                    </a>
-                    
-                    <a href="/tags/期望/" target="_blank">
-                        <span class="chip bg-color">期望</span>
+                    <a href="/tags/字符串/" target="_blank">
+                        <span class="chip bg-color">字符串</span>
                     </a>
                     
                 </div>
@@ -534,22 +494,19 @@
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/02/21/ti-jie-p1034-ju-xing-fu-gai/">
+                <a href="/2019/03/20/luogu-p1155-shuang-zhan-pai-xu/">
                     <div class="card-image">
                         
+                        <img src="https://i.loli.net/2019/03/20/5c91cb5d0bd73.png" class="responsive-img" alt="luogu P1155 双栈排序">
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="题解 P1034 【矩形覆盖】">
-                        
-                        <span class="card-title">题解 P1034 【矩形覆盖】</span>
+                        <span class="card-title">luogu P1155 双栈排序</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">这么好（shui）的题目怎么能不上随机化搜索呢//思路：随机化搜索+贪心（从今年D1可以看出贪心是多么重要的能力（然而D1AK也救不了我D2爆炸QAQ（事实证明D2还是多打暴力为上策）））
-//每次以一定的概率进行贪心选择或随机选择
-//贪</div>
+                    <div class="summary">骗分首先看到这道题我最先想到的是模拟但问题是其要求字典序最小，这就很麻烦了假设这个条件没有（也就是假装数据很弱去骗分）首先对于一个数，他只能加入空栈或栈顶的数比这个数大的栈为了经可能有解，每次都加入栈顶数最小的栈也就是说将空栈先加入一个极大</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-02-21
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-20
                             </span>
                         <span class="publish-author">
                             
@@ -578,12 +535,8 @@
                         <span class="chip bg-color">贪心</span>
                     </a>
                     
-                    <a href="/tags/非正解做法/" target="_blank">
-                        <span class="chip bg-color">非正解做法</span>
-                    </a>
-                    
-                    <a href="/tags/随机化搜索/" target="_blank">
-                        <span class="chip bg-color">随机化搜索</span>
+                    <a href="/tags/图论/" target="_blank">
+                        <span class="chip bg-color">图论</span>
                     </a>
                     
                 </div>

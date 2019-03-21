@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>字符串的最小表示法&amp;树的最小表示法学习笔记</title>
+      <link href="/2019/03/21/zi-fu-chuan-de-zui-xiao-biao-shi-fa-shu-de-zui-xiao-biao-shi-fa-xue-xi-bi-ji/"/>
+      <url>/2019/03/21/zi-fu-chuan-de-zui-xiao-biao-shi-fa-shu-de-zui-xiao-biao-shi-fa-xue-xi-bi-ji/</url>
+      
+        <content type="html"><![CDATA[<h3 id="本质思想"><a href="#本质思想" class="headerlink" title="本质思想"></a>本质思想</h3><p>两种算法都是解决同一种问题<br>询问两个东西（我也不知道叫什么了）能否通过某种变换而得到<br>然后实际上可以对他们的所有状态排序，然后找到最小的进行比较，若一样才一样</p><h3 id="字符串的最小表示"><a href="#字符串的最小表示" class="headerlink" title="字符串的最小表示"></a>字符串的最小表示</h3><p>字符串的循环同构是指：<br>news=s[i……n]+s[1……i-1]（这里还是要吐槽一下oi wiki这里打错了（当然如果你现在去看发现没什么问题了可能是因为我去修好了XD））<br>现在给你两个字符串让你求出其是否同构<br>现在考虑给定一个字符串，如何求出其最小表示<br>首先考虑给定两个位置i,j，给出一个长度k，如果从i，j开始的字符串一直到i+k,j+k都一样的话，但当前匹配到的字符不同则字符大的那个绝对不是最小表示法，因为必然存在一个字符串比他的字典序小</p><h3 id="核心操作"><a href="#核心操作" class="headerlink" title="核心操作"></a>核心操作</h3><p>将字典序更大的那个点直接跳到 i（j）+k+1的位置<br>接下来解释为什么<br>对于已经匹配的相同的字符串，一定已经是当前字符串中最小的同构方式了<br>假设不是这样<br>给定已匹配的部分为cab 那么在得到这个匹配状态之前肯定存在<br>i在c这个位置，j在a这个位置上的情况，则直接失配，不会存在这样的情况，其他情况以此类推<br>总之就是i(j)到i(j)+k之间没有比i(j)更优的位置<br>这里还要注意一点 i和j重合时，要让其中一个数+1</p><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//扒的oi wiki的，毕竟众多讲稿中，他的写法最优美</span><span class="token keyword">int</span> k<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>j<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token keyword">while</span><span class="token punctuation">(</span>k<span class="token operator">&lt;</span>n<span class="token operator">&amp;&amp;</span>i<span class="token operator">&lt;</span>n<span class="token operator">&amp;&amp;</span>j<span class="token operator">&lt;</span>n<span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token keyword">if</span><span class="token punctuation">(</span>sec<span class="token punctuation">[</span><span class="token punctuation">(</span>i<span class="token operator">+</span>k<span class="token punctuation">)</span><span class="token operator">%</span>n<span class="token punctuation">]</span><span class="token operator">==</span>sec<span class="token punctuation">[</span><span class="token punctuation">(</span>j<span class="token operator">+</span>k<span class="token punctuation">)</span><span class="token operator">%</span>n<span class="token punctuation">]</span><span class="token punctuation">)</span>    <span class="token punctuation">{</span>        k<span class="token operator">++</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span>    <span class="token keyword">else</span>    <span class="token punctuation">{</span>        sec<span class="token punctuation">[</span><span class="token punctuation">(</span>i<span class="token operator">+</span>k<span class="token punctuation">)</span><span class="token operator">%</span>n<span class="token punctuation">]</span><span class="token operator">></span>sec<span class="token punctuation">[</span><span class="token punctuation">(</span>j<span class="token operator">+</span>k<span class="token punctuation">)</span><span class="token operator">%</span>n<span class="token punctuation">]</span><span class="token operator">?</span>i<span class="token operator">=</span>i<span class="token operator">+</span>k<span class="token operator">+</span><span class="token number">1</span><span class="token operator">:</span>j<span class="token operator">=</span>j<span class="token operator">+</span>k<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>        <span class="token keyword">if</span><span class="token punctuation">(</span>i<span class="token operator">==</span>j<span class="token punctuation">)</span> i<span class="token operator">++</span><span class="token punctuation">;</span>        k<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span>i<span class="token operator">=</span><span class="token function">min</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span>j<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><h3 id="树的最小表示法"><a href="#树的最小表示法" class="headerlink" title="树的最小表示法"></a>树的最小表示法</h3><p>树的同构是指，两颗有根树可以通过交换根而变成相同的形态<br>类似的，我们将树也拍成字符串，我们可以想到dfs序，但由于这里每个点都是等价的<br>所以我们可以将dfs序改为01序列入为0出为1<br>直观的，为了使树的01串最小，只要从下到上合并的时候对子树从小到大排序即可<br>代码</p><pre class=" language-cpp"><code class="language-cpp">这么简单还想要代码？（其实是我懒得去扒了）</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习笔记 </tag>
+            
+            <tag> 树 </tag>
+            
+            <tag> 字符串 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>luogu P1155 双栈排序</title>
       <link href="/2019/03/20/luogu-p1155-shuang-zhan-pai-xu/"/>
       <url>/2019/03/20/luogu-p1155-shuang-zhan-pai-xu/</url>
@@ -51,9 +80,9 @@
       
         <tags>
             
-            <tag> 游记 </tag>
-            
             <tag> 题解 </tag>
+            
+            <tag> 游记 </tag>
             
             <tag> ACM </tag>
             
@@ -115,13 +144,13 @@
             
             <tag> 题解 </tag>
             
-            <tag> 贪心 </tag>
-            
-            <tag> 问题转化 </tag>
-            
             <tag> poj </tag>
             
+            <tag> 贪心 </tag>
+            
             <tag> 平面几何 </tag>
+            
+            <tag> 问题转化 </tag>
             
         </tags>
       
@@ -150,11 +179,11 @@
             
             <tag> luogu </tag>
             
+            <tag> 问题转化 </tag>
+            
             <tag> bzoj </tag>
             
             <tag> 数论 </tag>
-            
-            <tag> 问题转化 </tag>
             
         </tags>
       
