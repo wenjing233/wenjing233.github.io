@@ -309,12 +309,12 @@
                                 <span class="chip bg-color">题解</span>
                             </a>
                         
-                            <a href="/tags/poj/" target="_blank">
-                                <span class="chip bg-color">poj</span>
-                            </a>
-                        
                             <a href="/tags/贪心/" target="_blank">
                                 <span class="chip bg-color">贪心</span>
+                            </a>
+                        
+                            <a href="/tags/poj/" target="_blank">
+                                <span class="chip bg-color">poj</span>
                             </a>
                         
                             <a href="/tags/平面几何/" target="_blank">
@@ -474,6 +474,28 @@
         </div>
     </div>
 
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'f6af4406db689965aa5e',
+        clientSecret: 'af82898692d2e6d882cafea603c11d2813852a84',
+        repo: 'Gittalk',
+        owner: 'wenjing233',
+        admin: ["wenjing233"],
+        id: '2019-03-01T07-42-03',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
     
 
     
