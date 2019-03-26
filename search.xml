@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>博弈论学习笔记</title>
+      <link href="/2019/03/26/bo-yi-lun-xue-xi-bi-ji/"/>
+      <url>/2019/03/26/bo-yi-lun-xue-xi-bi-ji/</url>
+      
+        <content type="html"><![CDATA[<p>(本片文章将充斥着大量的大小写不分，括号中英文不分，请谅解)</p><h2 id="SG函数"><a href="#SG函数" class="headerlink" title="SG函数"></a>SG函数</h2><p>大部分博弈游戏都可以看做一个图上的游戏，两人轮流在图上行走到不同的状态，并且是一个递增有界的图（就是无论你怎么走，最后一定会停下来，而不是停不下来的希望之花），然而有些状态是终止态，走到上面的人输，必胜法即一定可以让对方走到中止态的方法。<br>现在定义集合F(x)为点x（即状态x）所能到达的所有状态，如果F（x）为空集则x为中止状态<br>定义G（x）为F(x)中所有状态y的g（y）所不包含的最小非负状态（若F(x)为空则G(x)=0）</p><h2 id="例题1"><a href="#例题1" class="headerlink" title="例题1"></a>例题1</h2><p>有n颗石子，两人轮流取，最少1颗，最多k颗，拿走最后的石子的那个人胜利<br>那么最后的必胜态就是0然后我们从小到大推<br>1可以到0<br>2可以到0 1<br>3可以到0 1 2<br>k可以到 k-1,k-2…0<br>则g(x)=x(1&lt;=x&lt;=k)<br>对于k+1其可以到1,2,3,4…k即g(k+1)=0<br>以此类推g(k+2)=1<br>我们发现这个函数是一个周期函数，周期为k+1<br>故任何一个数必然存在于一个周期的某一个位置，所以得到结论g(x)=x%(k+1)<br>对于本题如果g(n)=0则先手必胜<br>反之，后手一定能在f(n)找到一个y满足g(y)=0（余数性质）</p><h2 id="变式1"><a href="#变式1" class="headerlink" title="变式1"></a>变式1</h2><p>我们做东方题好不好啊<br>ao<br><a href="https://www.luogu.org/problemnew/show/U66339" target="_blank" rel="noopener">https://www.luogu.org/problemnew/show/U66339</a><br>其实就是把取完赢变成了取完输<br>也就是说只剩1颗的时候就必输了（当然只剩0颗也是必输）<br>也就是说先把n-1即可<br>但是！<br>这里特殊的是2——k+1颗先手还是必胜的，因为一定能把石头拿到只剩一颗<br>没了</p><h2 id="例题2-POJ1067"><a href="#例题2-POJ1067" class="headerlink" title="例题2 POJ1067"></a>例题2 POJ1067</h2><p>给定两堆石子，每次可以在一堆或两堆中取任意个石子（至少1个）轮流取，取完的人嬴<br>网上看完了证明，感觉这题并不是很适合放在第二题，这里在书信息学奥赛数学一本通里放在第二题（实际上也只有两题）不大合适，并且书上并没有给出证明<br>定义当前状态为一个二元组(a,b)表示两组石子分别有a,b个<br>显然(a,b)等价于(b,a)<br>首先显然的(k,0)(0,k)(k,k)都是先手必胜态</p><h4 id="定理1：对于a-b的二元组-a-b-先手必败态对于不同的a只有一组"><a href="#定理1：对于a-b的二元组-a-b-先手必败态对于不同的a只有一组" class="headerlink" title="定理1：对于a!=b的二元组(a,b)先手必败态对于不同的a只有一组"></a>定理1：对于a!=b的二元组(a,b)先手必败态对于不同的a只有一组</h4><p>若存在(a,b)(a,c)（c&gt;b）两组<br>则a,c一定能被取到a,b则先手是必胜的<br>同样这也能解释这个游戏为什么不是必胜就是必败</p><h4 id="定理2：若有必败-a-b-a-k-c-k-不存在"><a href="#定理2：若有必败-a-b-a-k-c-k-不存在" class="headerlink" title="定理2：若有必败(a,b) (a+k,c+k)不存在"></a>定理2：若有必败(a,b) (a+k,c+k)不存在</h4><p>证明和上面同理</p><h4 id="定理3：对必败的二元组-a-b-按a排序，则b-n-a-n-n-1"><a href="#定理3：对必败的二元组-a-b-按a排序，则b-n-a-n-n-1" class="headerlink" title="定理3：对必败的二元组(a,b)按a排序，则b[n]=a[n]+n-1;"></a>定理3：对必败的二元组(a,b)按a排序，则b[n]=a[n]+n-1;</h4><p>若前k个二元组满足b-a=第几个-1 则第k+1个二元组也满足<br>假设(a[n],a[n]+n-1)是必胜态则他一定可以到其他必败态<br>若在左边取则到了已经有的a或b且差值变大，不是必胜态<br>若在右边取，则差值变小，小差值的二元组已经有了且开头不是a[n]<br>同时差值不变，但a变小，所以不存在必败态<br>所以二元组的通向式就得到了，然后就可以得到网上的式子了<br>但实际上我感觉这题做到递推式做出来就已经有蓝题难度了（<br>递推式是b=[a*1.618] ([]是下取整符号)<br>那么接下来涉及的东西就已经不属于博弈论了XD</p><h3 id="贝亚蒂定理"><a href="#贝亚蒂定理" class="headerlink" title="贝亚蒂定理"></a>贝亚蒂定理</h3><p>设a、b是正无理数且 1/a +1/b =1。记P={ [na] | n为任意的正整数}，Q={ [nb] | n 为任意的正整数}，([x]’指的是取x的整数部分)则P与Q是Z+的一个划分，即P∩Q为空集且P∪Q为正整数集合N+。（这玩意儿总不用我证明了吧）<br>这里前面我们已经证明过a,b是不相等且不重复的二元组，则他们属于贝亚蒂列<br>那么接下来就事解方程时间辣QAQ<br> 已知Beatty序列：an= ⌊α<em>n⌋，bn= ⌊β</em>n⌋，而bn = an + n = ⌊α<em>n⌋ + n = ⌊（α+1）</em>n⌋，於是β = （α+1），代入1/α + 1/β = 1，解得α =（1+√5）/ 2 ≈ 1.618，這個數字就是黃金比例數！！<br> 这段事最简单的，就粘别人blog了QAQ<br> 没咯~~~</p><pre class=" language-cpp"><code class="language-cpp"> <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h></span></span><span class="token keyword">const</span> <span class="token keyword">double</span> L <span class="token operator">=</span> <span class="token number">1.6180339887</span><span class="token punctuation">;</span><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token keyword">long</span> <span class="token keyword">long</span> a<span class="token punctuation">,</span>b<span class="token punctuation">,</span>det<span class="token punctuation">;</span>    <span class="token keyword">while</span><span class="token punctuation">(</span>cin<span class="token operator">>></span>a<span class="token operator">>></span>b<span class="token punctuation">)</span>    <span class="token punctuation">{</span>        <span class="token keyword">if</span><span class="token punctuation">(</span>a <span class="token operator">></span> b<span class="token punctuation">)</span> <span class="token function">swap</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>        det <span class="token operator">=</span> b<span class="token operator">-</span>a<span class="token punctuation">;</span>        <span class="token keyword">if</span><span class="token punctuation">(</span>a <span class="token operator">==</span> <span class="token keyword">int</span><span class="token punctuation">(</span>det <span class="token operator">*</span> L<span class="token punctuation">)</span><span class="token punctuation">)</span>            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"0\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token keyword">else</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"1\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span>    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token punctuation">}</span></code></pre><h2 id="例题3-luoguP2197"><a href="#例题3-luoguP2197" class="headerlink" title="例题3 luoguP2197"></a>例题3 luoguP2197</h2><p>你 妈 的 久 等 了<br>甲，乙两个人玩Nim取石子游戏<br>nim游戏的规则是这样的：地上有n堆石子（每堆石子数量小于10000），每人每次可从任意一堆石子里取出任意多枚石子扔掉，可以取完，不能不取。每次只能从一堆里取。最后没石子可取的人就输了。假如甲是先手，且告诉你这n堆石子的数量，他想知道是否存在先手必胜的策略。<br>比起上一题这题不知道水到哪里去了<br>对于一个状态{a1,a2,a3…an}<br>其SG函数定义为a1^a2^…^an<br>则SG(x)为0时，先手必胜<br>首先状态{0,0,0…0}必胜<br>对于任意一个SG(x)!=0都能变成<br>SG(y)=0<br>证明设SG(x)最后高位为a<br>则可以把a直接抹除或把a变成任意个更低的位数<br>例如现在1+2+4是异或出来的结果那么4就可以变成1+2（也就是减少1）<br>那么一直这么做，最后总会到达最小的那个异或为0的状态，也就是{0,0,0,0…0}（因为石子数量是递减的QAQ）</p><pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span><span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span><span class="token keyword">int</span> ans<span class="token punctuation">,</span>n<span class="token punctuation">;</span><span class="token keyword">int</span> t<span class="token punctuation">;</span><span class="token keyword">inline</span> <span class="token keyword">int</span> <span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token keyword">int</span> tot<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>    <span class="token keyword">char</span> ch<span class="token punctuation">;</span>    <span class="token keyword">while</span><span class="token punctuation">(</span>ch<span class="token operator">&lt;</span><span class="token string">'0'</span><span class="token operator">||</span>ch<span class="token operator">></span><span class="token string">'9'</span><span class="token punctuation">)</span> ch<span class="token operator">=</span><span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token keyword">while</span><span class="token punctuation">(</span>ch<span class="token operator">>=</span><span class="token string">'0'</span><span class="token operator">&amp;&amp;</span>ch<span class="token operator">&lt;=</span><span class="token string">'9'</span><span class="token punctuation">)</span> tot<span class="token operator">=</span>tot<span class="token operator">*</span><span class="token number">10</span><span class="token operator">+</span>ch<span class="token operator">-</span><span class="token string">'0'</span><span class="token punctuation">,</span>ch<span class="token operator">=</span><span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token keyword">return</span> tot<span class="token punctuation">;</span>    <span class="token punctuation">}</span><span class="token keyword">int</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>    t<span class="token operator">=</span><span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> ii<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>ii<span class="token operator">&lt;=</span>t<span class="token punctuation">;</span>ii<span class="token operator">++</span><span class="token punctuation">)</span>    <span class="token punctuation">{</span>        n<span class="token operator">=</span><span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        ans<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">&lt;=</span>n<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>        <span class="token punctuation">{</span>            ans<span class="token operator">^</span><span class="token operator">=</span><span class="token punctuation">(</span><span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token punctuation">}</span>        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>ans<span class="token punctuation">)</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"No\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token keyword">else</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Yes\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span>    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span><span class="token comment" spellcheck="true">/*15 1000*/</span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习笔记 </tag>
+            
+            <tag> 博弈论 </tag>
+            
+            <tag> 数论 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>字符串的最小表示法&amp;树的最小表示法学习笔记</title>
       <link href="/2019/03/21/zi-fu-chuan-de-zui-xiao-biao-shi-fa-shu-de-zui-xiao-biao-shi-fa-xue-xi-bi-ji/"/>
       <url>/2019/03/21/zi-fu-chuan-de-zui-xiao-biao-shi-fa-shu-de-zui-xiao-biao-shi-fa-xue-xi-bi-ji/</url>
@@ -51,9 +80,9 @@
             
             <tag> 题解 </tag>
             
-            <tag> luogu </tag>
-            
             <tag> 贪心 </tag>
+            
+            <tag> luogu </tag>
             
             <tag> 图论 </tag>
             
@@ -177,13 +206,13 @@
             
             <tag> 题解 </tag>
             
-            <tag> luogu </tag>
-            
             <tag> 问题转化 </tag>
             
-            <tag> bzoj </tag>
+            <tag> luogu </tag>
             
             <tag> 数论 </tag>
+            
+            <tag> bzoj </tag>
             
         </tags>
       
@@ -309,9 +338,9 @@
             
             <tag> 题解 </tag>
             
-            <tag> luogu </tag>
-            
             <tag> 贪心 </tag>
+            
+            <tag> luogu </tag>
             
             <tag> 非正解做法 </tag>
             

@@ -4,9 +4,9 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="字符串的最小表示法&amp;树的最小表示法学习笔记, wenjing233的小站">
-    <meta name="description" content="本质思想两种算法都是解决同一种问题询问两个东西（我也不知道叫什么了）能否通过某种变换而得到然后实际上可以对他们的所有状态排序，然后找到最小的进行比较，若一样才一样
-字符串的最小表示字符串的循环同构是指：news=s[i……n]+s[1……i">
+    <meta name="keywords" content="博弈论学习笔记, wenjing233的小站">
+    <meta name="description" content="(本片文章将充斥着大量的大小写不分，括号中英文不分，请谅解)
+SG函数大部分博弈游戏都可以看做一个图上的游戏，两人轮流在图上行走到不同的状态，并且是一个递增有界的图（就是无论你怎么走，最后一定会停下来，而不是停不下来的希望之花），然而有些状">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>字符串的最小表示法&amp;树的最小表示法学习笔记 | wenjing233的小站</title>
+    <title>博弈论学习笔记 | wenjing233的小站</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -277,13 +277,13 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('https://i.loli.net/2019/03/21/5c93829ab4c23.jpeg')">
+<div class="bg-cover post-cover" style="background-image: url('https://i.loli.net/2019/03/26/5c9a084d61e34.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        字符串的最小表示法&amp;树的最小表示法学习笔记
+                        博弈论学习笔记
                     </div>
                 </div>
             </div>
@@ -309,12 +309,12 @@
                                 <span class="chip bg-color">学习笔记</span>
                             </a>
                         
-                            <a href="/tags/字符串/" target="_blank">
-                                <span class="chip bg-color">字符串</span>
+                            <a href="/tags/博弈论/" target="_blank">
+                                <span class="chip bg-color">博弈论</span>
                             </a>
                         
-                            <a href="/tags/树/" target="_blank">
-                                <span class="chip bg-color">树</span>
+                            <a href="/tags/数论/" target="_blank">
+                                <span class="chip bg-color">数论</span>
                             </a>
                         
                     </div>
@@ -337,21 +337,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-03-21
+                    2019-03-26
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        666
+                        1.6k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        2 分
+                        6 分
                     </div>
                     
                 
@@ -367,28 +367,64 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="本质思想"><a href="#本质思想" class="headerlink" title="本质思想"></a>本质思想</h3><p>两种算法都是解决同一种问题<br>询问两个东西（我也不知道叫什么了）能否通过某种变换而得到<br>然后实际上可以对他们的所有状态排序，然后找到最小的进行比较，若一样才一样</p>
-<h3 id="字符串的最小表示"><a href="#字符串的最小表示" class="headerlink" title="字符串的最小表示"></a>字符串的最小表示</h3><p>字符串的循环同构是指：<br>news=s[i……n]+s[1……i-1]（这里还是要吐槽一下oi wiki这里打错了（当然如果你现在去看发现没什么问题了可能是因为我去修好了XD））<br>现在给你两个字符串让你求出其是否同构<br>现在考虑给定一个字符串，如何求出其最小表示<br>首先考虑给定两个位置i,j，给出一个长度k，如果从i，j开始的字符串一直到i+k,j+k都一样的话，但当前匹配到的字符不同则字符大的那个绝对不是最小表示法，因为必然存在一个字符串比他的字典序小</p>
-<h3 id="核心操作"><a href="#核心操作" class="headerlink" title="核心操作"></a>核心操作</h3><p>将字典序更大的那个点直接跳到 i（j）+k+1的位置<br>接下来解释为什么<br>对于已经匹配的相同的字符串，一定已经是当前字符串中最小的同构方式了<br>假设不是这样<br>给定已匹配的部分为cab 那么在得到这个匹配状态之前肯定存在<br>i在c这个位置，j在a这个位置上的情况，则直接失配，不会存在这样的情况，其他情况以此类推<br>总之就是i(j)到i(j)+k之间没有比i(j)更优的位置<br>这里还要注意一点 i和j重合时，要让其中一个数+1</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//扒的oi wiki的，毕竟众多讲稿中，他的写法最优美</span>
-<span class="token keyword">int</span> k<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>j<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token keyword">while</span><span class="token punctuation">(</span>k<span class="token operator">&lt;</span>n<span class="token operator">&amp;&amp;</span>i<span class="token operator">&lt;</span>n<span class="token operator">&amp;&amp;</span>j<span class="token operator">&lt;</span>n<span class="token punctuation">)</span>
+                <p>(本片文章将充斥着大量的大小写不分，括号中英文不分，请谅解)</p>
+<h2 id="SG函数"><a href="#SG函数" class="headerlink" title="SG函数"></a>SG函数</h2><p>大部分博弈游戏都可以看做一个图上的游戏，两人轮流在图上行走到不同的状态，并且是一个递增有界的图（就是无论你怎么走，最后一定会停下来，而不是停不下来的希望之花），然而有些状态是终止态，走到上面的人输，必胜法即一定可以让对方走到中止态的方法。<br>现在定义集合F(x)为点x（即状态x）所能到达的所有状态，如果F（x）为空集则x为中止状态<br>定义G（x）为F(x)中所有状态y的g（y）所不包含的最小非负状态（若F(x)为空则G(x)=0）</p>
+<h2 id="例题1"><a href="#例题1" class="headerlink" title="例题1"></a>例题1</h2><p>有n颗石子，两人轮流取，最少1颗，最多k颗，拿走最后的石子的那个人胜利<br>那么最后的必胜态就是0然后我们从小到大推<br>1可以到0<br>2可以到0 1<br>3可以到0 1 2<br>k可以到 k-1,k-2…0<br>则g(x)=x(1&lt;=x&lt;=k)<br>对于k+1其可以到1,2,3,4…k即g(k+1)=0<br>以此类推g(k+2)=1<br>我们发现这个函数是一个周期函数，周期为k+1<br>故任何一个数必然存在于一个周期的某一个位置，所以得到结论g(x)=x%(k+1)<br>对于本题如果g(n)=0则先手必胜<br>反之，后手一定能在f(n)找到一个y满足g(y)=0（余数性质）</p>
+<h2 id="变式1"><a href="#变式1" class="headerlink" title="变式1"></a>变式1</h2><p>我们做东方题好不好啊<br>ao<br><a href="https://www.luogu.org/problemnew/show/U66339" target="_blank" rel="noopener">https://www.luogu.org/problemnew/show/U66339</a><br>其实就是把取完赢变成了取完输<br>也就是说只剩1颗的时候就必输了（当然只剩0颗也是必输）<br>也就是说先把n-1即可<br>但是！<br>这里特殊的是2——k+1颗先手还是必胜的，因为一定能把石头拿到只剩一颗<br>没了</p>
+<h2 id="例题2-POJ1067"><a href="#例题2-POJ1067" class="headerlink" title="例题2 POJ1067"></a>例题2 POJ1067</h2><p>给定两堆石子，每次可以在一堆或两堆中取任意个石子（至少1个）轮流取，取完的人嬴<br>网上看完了证明，感觉这题并不是很适合放在第二题，这里在书信息学奥赛数学一本通里放在第二题（实际上也只有两题）不大合适，并且书上并没有给出证明<br>定义当前状态为一个二元组(a,b)表示两组石子分别有a,b个<br>显然(a,b)等价于(b,a)<br>首先显然的(k,0)(0,k)(k,k)都是先手必胜态</p>
+<h4 id="定理1：对于a-b的二元组-a-b-先手必败态对于不同的a只有一组"><a href="#定理1：对于a-b的二元组-a-b-先手必败态对于不同的a只有一组" class="headerlink" title="定理1：对于a!=b的二元组(a,b)先手必败态对于不同的a只有一组"></a>定理1：对于a!=b的二元组(a,b)先手必败态对于不同的a只有一组</h4><p>若存在(a,b)(a,c)（c&gt;b）两组<br>则a,c一定能被取到a,b则先手是必胜的<br>同样这也能解释这个游戏为什么不是必胜就是必败</p>
+<h4 id="定理2：若有必败-a-b-a-k-c-k-不存在"><a href="#定理2：若有必败-a-b-a-k-c-k-不存在" class="headerlink" title="定理2：若有必败(a,b) (a+k,c+k)不存在"></a>定理2：若有必败(a,b) (a+k,c+k)不存在</h4><p>证明和上面同理</p>
+<h4 id="定理3：对必败的二元组-a-b-按a排序，则b-n-a-n-n-1"><a href="#定理3：对必败的二元组-a-b-按a排序，则b-n-a-n-n-1" class="headerlink" title="定理3：对必败的二元组(a,b)按a排序，则b[n]=a[n]+n-1;"></a>定理3：对必败的二元组(a,b)按a排序，则b[n]=a[n]+n-1;</h4><p>若前k个二元组满足b-a=第几个-1 则第k+1个二元组也满足<br>假设(a[n],a[n]+n-1)是必胜态则他一定可以到其他必败态<br>若在左边取则到了已经有的a或b且差值变大，不是必胜态<br>若在右边取，则差值变小，小差值的二元组已经有了且开头不是a[n]<br>同时差值不变，但a变小，所以不存在必败态<br>所以二元组的通向式就得到了，然后就可以得到网上的式子了<br>但实际上我感觉这题做到递推式做出来就已经有蓝题难度了（<br>递推式是b=[a*1.618] ([]是下取整符号)<br>那么接下来涉及的东西就已经不属于博弈论了XD</p>
+<h3 id="贝亚蒂定理"><a href="#贝亚蒂定理" class="headerlink" title="贝亚蒂定理"></a>贝亚蒂定理</h3><p>设a、b是正无理数且 1/a +1/b =1。记P={ [na] | n为任意的正整数}，Q={ [nb] | n 为任意的正整数}，([x]’指的是取x的整数部分)则P与Q是Z+的一个划分，即P∩Q为空集且P∪Q为正整数集合N+。（这玩意儿总不用我证明了吧）<br>这里前面我们已经证明过a,b是不相等且不重复的二元组，则他们属于贝亚蒂列<br>那么接下来就事解方程时间辣QAQ<br> 已知Beatty序列：an= ⌊α<em>n⌋，bn= ⌊β</em>n⌋，而bn = an + n = ⌊α<em>n⌋ + n = ⌊（α+1）</em>n⌋，於是β = （α+1），代入1/α + 1/β = 1，解得α =（1+√5）/ 2 ≈ 1.618，這個數字就是黃金比例數！！<br> 这段事最简单的，就粘别人blog了QAQ<br> 没咯~~~</p>
+<pre class=" language-cpp"><code class="language-cpp"> <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h></span></span>
+<span class="token keyword">const</span> <span class="token keyword">double</span> L <span class="token operator">=</span> <span class="token number">1.6180339887</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>sec<span class="token punctuation">[</span><span class="token punctuation">(</span>i<span class="token operator">+</span>k<span class="token punctuation">)</span><span class="token operator">%</span>n<span class="token punctuation">]</span><span class="token operator">==</span>sec<span class="token punctuation">[</span><span class="token punctuation">(</span>j<span class="token operator">+</span>k<span class="token punctuation">)</span><span class="token operator">%</span>n<span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">long</span> <span class="token keyword">long</span> a<span class="token punctuation">,</span>b<span class="token punctuation">,</span>det<span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>cin<span class="token operator">>></span>a<span class="token operator">>></span>b<span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
-        k<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>a <span class="token operator">></span> b<span class="token punctuation">)</span> <span class="token function">swap</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        det <span class="token operator">=</span> b<span class="token operator">-</span>a<span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>a <span class="token operator">==</span> <span class="token keyword">int</span><span class="token punctuation">(</span>det <span class="token operator">*</span> L<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"0\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">else</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"1\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-    <span class="token keyword">else</span>
-    <span class="token punctuation">{</span>
-        sec<span class="token punctuation">[</span><span class="token punctuation">(</span>i<span class="token operator">+</span>k<span class="token punctuation">)</span><span class="token operator">%</span>n<span class="token punctuation">]</span><span class="token operator">></span>sec<span class="token punctuation">[</span><span class="token punctuation">(</span>j<span class="token operator">+</span>k<span class="token punctuation">)</span><span class="token operator">%</span>n<span class="token punctuation">]</span><span class="token operator">?</span>i<span class="token operator">=</span>i<span class="token operator">+</span>k<span class="token operator">+</span><span class="token number">1</span><span class="token operator">:</span>j<span class="token operator">=</span>j<span class="token operator">+</span>k<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>i<span class="token operator">==</span>j<span class="token punctuation">)</span> i<span class="token operator">++</span><span class="token punctuation">;</span>
-        k<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-i<span class="token operator">=</span><span class="token function">min</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span>j<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<h3 id="树的最小表示法"><a href="#树的最小表示法" class="headerlink" title="树的最小表示法"></a>树的最小表示法</h3><p>树的同构是指，两颗有根树可以通过交换根而变成相同的形态<br>类似的，我们将树也拍成字符串，我们可以想到dfs序，但由于这里每个点都是等价的<br>所以我们可以将dfs序改为01序列入为0出为1<br>直观的，为了使树的01串最小，只要从下到上合并的时候对子树从小到大排序即可<br>代码</p>
-<pre class=" language-cpp"><code class="language-cpp">这么简单还想要代码？（其实是我懒得去扒了）
+<h2 id="例题3-luoguP2197"><a href="#例题3-luoguP2197" class="headerlink" title="例题3 luoguP2197"></a>例题3 luoguP2197</h2><p>你 妈 的 久 等 了<br>甲，乙两个人玩Nim取石子游戏<br>nim游戏的规则是这样的：地上有n堆石子（每堆石子数量小于10000），每人每次可从任意一堆石子里取出任意多枚石子扔掉，可以取完，不能不取。每次只能从一堆里取。最后没石子可取的人就输了。假如甲是先手，且告诉你这n堆石子的数量，他想知道是否存在先手必胜的策略。<br>比起上一题这题不知道水到哪里去了<br>对于一个状态{a1,a2,a3…an}<br>其SG函数定义为a1^a2^…^an<br>则SG(x)为0时，先手必胜<br>首先状态{0,0,0…0}必胜<br>对于任意一个SG(x)!=0都能变成<br>SG(y)=0<br>证明设SG(x)最后高位为a<br>则可以把a直接抹除或把a变成任意个更低的位数<br>例如现在1+2+4是异或出来的结果那么4就可以变成1+2（也就是减少1）<br>那么一直这么做，最后总会到达最小的那个异或为0的状态，也就是{0,0,0,0…0}（因为石子数量是递减的QAQ）</p>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token keyword">int</span> ans<span class="token punctuation">,</span>n<span class="token punctuation">;</span>
+<span class="token keyword">int</span> t<span class="token punctuation">;</span>
+<span class="token keyword">inline</span> <span class="token keyword">int</span> <span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> tot<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span> ch<span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>ch<span class="token operator">&lt;</span><span class="token string">'0'</span><span class="token operator">||</span>ch<span class="token operator">></span><span class="token string">'9'</span><span class="token punctuation">)</span> ch<span class="token operator">=</span><span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>ch<span class="token operator">>=</span><span class="token string">'0'</span><span class="token operator">&amp;&amp;</span>ch<span class="token operator">&lt;=</span><span class="token string">'9'</span><span class="token punctuation">)</span> tot<span class="token operator">=</span>tot<span class="token operator">*</span><span class="token number">10</span><span class="token operator">+</span>ch<span class="token operator">-</span><span class="token string">'0'</span><span class="token punctuation">,</span>ch<span class="token operator">=</span><span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> tot<span class="token punctuation">;</span>    
+<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    t<span class="token operator">=</span><span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> ii<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>ii<span class="token operator">&lt;=</span>t<span class="token punctuation">;</span>ii<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        n<span class="token operator">=</span><span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ans<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">&lt;=</span>n<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            ans<span class="token operator">^</span><span class="token operator">=</span><span class="token punctuation">(</span><span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>ans<span class="token punctuation">)</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"No\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">else</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Yes\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>     
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">/*
+1
+5 1000
+*/</span>
 </code></pre>
 
             </div>
@@ -413,7 +449,7 @@ i<span class="token operator">=</span><span class="token function">min</span><sp
                     </span>
                     <a href="http://wenjing233.github.io" class="b-link-green">wenjing233的小站</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/03/21/zi-fu-chuan-de-zui-xiao-biao-shi-fa-shu-de-zui-xiao-biao-shi-fa-xue-xi-bi-ji/" class="b-link-green">字符串的最小表示法&amp;树的最小表示法学习笔记</a>
+                    <a href="/2019/03/26/bo-yi-lun-xue-xi-bi-ji/" class="b-link-green">博弈论学习笔记</a>
                 </p>
             </div>
         </div>
@@ -435,7 +471,7 @@ i<span class="token operator">=</span><span class="token function">min</span><sp
         repo: 'Gittalk',
         owner: 'wenjing233',
         admin: ["wenjing233"],
-        id: '2019-03-21T08-17-29',
+        id: '2019-03-26T08-17-15',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -458,7 +494,8 @@ i<span class="token operator">=</span><span class="token function">min</span><sp
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2019/03/26/bo-yi-lun-xue-xi-bi-ji/">
                     <div class="card-image">
@@ -472,9 +509,9 @@ i<span class="token operator">=</span><span class="token function">min</span><sp
                     <div class="summary">(本片文章将充斥着大量的大小写不分，括号中英文不分，请谅解)
 SG函数大部分博弈游戏都可以看做一个图上的游戏，两人轮流在图上行走到不同的状态，并且是一个递增有界的图（就是无论你怎么走，最后一定会停下来，而不是停不下来的希望之花），然而有些状</div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-26
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-26
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -487,6 +524,7 @@ SG函数大部分博弈游戏都可以看做一个图上的游戏，两人轮流
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -513,26 +551,27 @@ SG函数大部分博弈游戏都可以看做一个图上的游戏，两人轮流
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/03/20/luogu-p1155-shuang-zhan-pai-xu/">
+                <a href="/2019/03/21/zi-fu-chuan-de-zui-xiao-biao-shi-fa-shu-de-zui-xiao-biao-shi-fa-xue-xi-bi-ji/">
                     <div class="card-image">
                         
-                        <img src="https://i.loli.net/2019/03/20/5c91cb5d0bd73.png" class="responsive-img" alt="luogu P1155 双栈排序">
+                        <img src="https://i.loli.net/2019/03/21/5c93829ab4c23.jpeg" class="responsive-img" alt="字符串的最小表示法&树的最小表示法学习笔记">
                         
-                        <span class="card-title">luogu P1155 双栈排序</span>
+                        <span class="card-title">字符串的最小表示法&树的最小表示法学习笔记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">骗分首先看到这道题我最先想到的是模拟但问题是其要求字典序最小，这就很麻烦了假设这个条件没有（也就是假装数据很弱去骗分）首先对于一个数，他只能加入空栈或栈顶的数比这个数大的栈为了经可能有解，每次都加入栈顶数最小的栈也就是说将空栈先加入一个极大</div>
+                    <div class="summary">本质思想两种算法都是解决同一种问题询问两个东西（我也不知道叫什么了）能否通过某种变换而得到然后实际上可以对他们的所有状态排序，然后找到最小的进行比较，若一样才一样
+字符串的最小表示字符串的循环同构是指：news=s[i……n]+s[1……i</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-20
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-21
                             </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/题解/" class="post-category" target="_blank">
-                                    题解
+                            <a href="/categories/学习笔记/" class="post-category" target="_blank">
+                                    学习笔记
                                 </a>
                             
                             
@@ -542,20 +581,16 @@ SG函数大部分博弈游戏都可以看做一个图上的游戏，两人轮流
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/题解/" target="_blank">
-                        <span class="chip bg-color">题解</span>
+                    <a href="/tags/学习笔记/" target="_blank">
+                        <span class="chip bg-color">学习笔记</span>
                     </a>
                     
-                    <a href="/tags/贪心/" target="_blank">
-                        <span class="chip bg-color">贪心</span>
+                    <a href="/tags/字符串/" target="_blank">
+                        <span class="chip bg-color">字符串</span>
                     </a>
                     
-                    <a href="/tags/luogu/" target="_blank">
-                        <span class="chip bg-color">luogu</span>
-                    </a>
-                    
-                    <a href="/tags/图论/" target="_blank">
-                        <span class="chip bg-color">图论</span>
+                    <a href="/tags/树/" target="_blank">
+                        <span class="chip bg-color">树</span>
                     </a>
                     
                 </div>
