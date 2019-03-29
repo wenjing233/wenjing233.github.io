@@ -5,8 +5,8 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
     <meta name="keywords" content="博弈论学习笔记, wenjing233的小站">
-    <meta name="description" content="(本片文章将充斥着大量的大小写不分，括号中英文不分，请谅解)
-SG函数大部分博弈游戏都可以看做一个图上的游戏，两人轮流在图上行走到不同的状态，并且是一个递增有界的图（就是无论你怎么走，最后一定会停下来，而不是停不下来的希望之花），然而有些状">
+    <meta name="description" content="(本篇文章将充斥着大量的大小写不分，括号中英文不分，请谅解)本篇blog推荐的题目均是可以证明的题解（不能证明的SG函数有什么存在的必要吗（恼））
+ICGICG就是公平组合游戏，其满足有两个玩家轮流行动。双方的游戏方式一致。双方均知道游戏的">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -309,12 +309,12 @@ SG函数大部分博弈游戏都可以看做一个图上的游戏，两人轮流
                                 <span class="chip bg-color">学习笔记</span>
                             </a>
                         
-                            <a href="/tags/博弈论/" target="_blank">
-                                <span class="chip bg-color">博弈论</span>
-                            </a>
-                        
                             <a href="/tags/数论/" target="_blank">
                                 <span class="chip bg-color">数论</span>
+                            </a>
+                        
+                            <a href="/tags/博弈论/" target="_blank">
+                                <span class="chip bg-color">博弈论</span>
                             </a>
                         
                     </div>
@@ -344,14 +344,14 @@ SG函数大部分博弈游戏都可以看做一个图上的游戏，两人轮流
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.6k
+                        2.9k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        6 分
+                        11 分
                     </div>
                     
                 
@@ -367,11 +367,12 @@ SG函数大部分博弈游戏都可以看做一个图上的游戏，两人轮流
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>(本片文章将充斥着大量的大小写不分，括号中英文不分，请谅解)</p>
-<h2 id="SG函数"><a href="#SG函数" class="headerlink" title="SG函数"></a>SG函数</h2><p>大部分博弈游戏都可以看做一个图上的游戏，两人轮流在图上行走到不同的状态，并且是一个递增有界的图（就是无论你怎么走，最后一定会停下来，而不是停不下来的希望之花），然而有些状态是终止态，走到上面的人输，必胜法即一定可以让对方走到中止态的方法。<br>现在定义集合F(x)为点x（即状态x）所能到达的所有状态，如果F（x）为空集则x为中止状态<br>定义G（x）为F(x)中所有状态y的g（y）所不包含的最小非负状态（若F(x)为空则G(x)=0）</p>
+                <p>(本篇文章将充斥着大量的大小写不分，括号中英文不分，请谅解)<br>本篇blog推荐的题目均是可以证明的题解（不能证明的SG函数有什么存在的必要吗（恼））</p>
+<h2 id="ICG"><a href="#ICG" class="headerlink" title="ICG"></a>ICG</h2><p>ICG就是公平组合游戏，其满足<br>有两个玩家轮流行动。<br>双方的游戏方式一致。<br>双方均知道游戏的完整信息。<br>以玩家无法行动为游戏结束。<br>游戏在有限步数内结束，并且一定能分出胜负。<br>经典的Nim游戏就是公平组合游戏的代表，但是围棋、象棋以及井字棋这些不属于，因为这三种双方的行动不同。而且像井字棋，可能存在平局。</p>
+<h2 id="SG函数"><a href="#SG函数" class="headerlink" title="SG函数"></a>SG函数</h2><p>ICG可以看做一个图上的游戏，两人轮流在图上行走到不同的状态，并且是一个递增有界的图（就是无论你怎么走，最后一定会停下来，而不是停不下来的希望之花），然而有些状态是终止态，走到上面的人输，必胜法即一定可以让对方走到中止态的方法。<br>现在定义集合F(x)为点x（即状态x）所能到达的所有状态，如果F（x）为空集则x为中止状态<br>定义G（x）为F(x)中所有状态y的g（y）所不包含的最小非负状态（若F(x)为空则G(x)=0）<br>SG函数最重要的定理就是 G(X)=G({x1,x2…xn})=G(x1)^G(x2)^…^G(xn)</p>
 <h2 id="例题1"><a href="#例题1" class="headerlink" title="例题1"></a>例题1</h2><p>有n颗石子，两人轮流取，最少1颗，最多k颗，拿走最后的石子的那个人胜利<br>那么最后的必胜态就是0然后我们从小到大推<br>1可以到0<br>2可以到0 1<br>3可以到0 1 2<br>k可以到 k-1,k-2…0<br>则g(x)=x(1&lt;=x&lt;=k)<br>对于k+1其可以到1,2,3,4…k即g(k+1)=0<br>以此类推g(k+2)=1<br>我们发现这个函数是一个周期函数，周期为k+1<br>故任何一个数必然存在于一个周期的某一个位置，所以得到结论g(x)=x%(k+1)<br>对于本题如果g(n)=0则先手必胜<br>反之，后手一定能在f(n)找到一个y满足g(y)=0（余数性质）</p>
 <h2 id="变式1"><a href="#变式1" class="headerlink" title="变式1"></a>变式1</h2><p>我们做东方题好不好啊<br>ao<br><a href="https://www.luogu.org/problemnew/show/U66339" target="_blank" rel="noopener">https://www.luogu.org/problemnew/show/U66339</a><br>其实就是把取完赢变成了取完输<br>也就是说只剩1颗的时候就必输了（当然只剩0颗也是必输）<br>也就是说先把n-1即可<br>但是！<br>这里特殊的是2——k+1颗先手还是必胜的，因为一定能把石头拿到只剩一颗<br>没了</p>
-<h2 id="例题2-POJ1067"><a href="#例题2-POJ1067" class="headerlink" title="例题2 POJ1067"></a>例题2 POJ1067</h2><p>给定两堆石子，每次可以在一堆或两堆中取任意个石子（至少1个）轮流取，取完的人嬴<br>网上看完了证明，感觉这题并不是很适合放在第二题，这里在书信息学奥赛数学一本通里放在第二题（实际上也只有两题）不大合适，并且书上并没有给出证明<br>定义当前状态为一个二元组(a,b)表示两组石子分别有a,b个<br>显然(a,b)等价于(b,a)<br>首先显然的(k,0)(0,k)(k,k)都是先手必胜态</p>
+<h2 id="例题2-POJ1067"><a href="#例题2-POJ1067" class="headerlink" title="例题2 POJ1067"></a>例题2 POJ1067</h2><p>给定两堆石子，每次可以在一堆或两堆中取任意个石子（至少1个）轮流取，取完的人嬴<br>网上看完了证明，感觉这题并不是很适合放在第二题，而且，这里在书信息学奥赛数学一本通里放在第二题（实际上也只有两题）不大合适，并且书上并没有给出证明<br>定义当前状态为一个二元组(a,b)表示两组石子分别有a,b个<br>显然(a,b)等价于(b,a)<br>首先显然的(k,0)(0,k)(k,k)都是先手必胜态</p>
 <h4 id="定理1：对于a-b的二元组-a-b-先手必败态对于不同的a只有一组"><a href="#定理1：对于a-b的二元组-a-b-先手必败态对于不同的a只有一组" class="headerlink" title="定理1：对于a!=b的二元组(a,b)先手必败态对于不同的a只有一组"></a>定理1：对于a!=b的二元组(a,b)先手必败态对于不同的a只有一组</h4><p>若存在(a,b)(a,c)（c&gt;b）两组<br>则a,c一定能被取到a,b则先手是必胜的<br>同样这也能解释这个游戏为什么不是必胜就是必败</p>
 <h4 id="定理2：若有必败-a-b-a-k-c-k-不存在"><a href="#定理2：若有必败-a-b-a-k-c-k-不存在" class="headerlink" title="定理2：若有必败(a,b) (a+k,c+k)不存在"></a>定理2：若有必败(a,b) (a+k,c+k)不存在</h4><p>证明和上面同理</p>
 <h4 id="定理3：对必败的二元组-a-b-按a排序，则b-n-a-n-n-1"><a href="#定理3：对必败的二元组-a-b-按a排序，则b-n-a-n-n-1" class="headerlink" title="定理3：对必败的二元组(a,b)按a排序，则b[n]=a[n]+n-1;"></a>定理3：对必败的二元组(a,b)按a排序，则b[n]=a[n]+n-1;</h4><p>若前k个二元组满足b-a=第几个-1 则第k+1个二元组也满足<br>假设(a[n],a[n]+n-1)是必胜态则他一定可以到其他必败态<br>若在左边取则到了已经有的a或b且差值变大，不是必胜态<br>若在右边取，则差值变小，小差值的二元组已经有了且开头不是a[n]<br>同时差值不变，但a变小，所以不存在必败态<br>所以二元组的通向式就得到了，然后就可以得到网上的式子了<br>但实际上我感觉这题做到递推式做出来就已经有蓝题难度了（<br>递推式是b=[a*1.618] ([]是下取整符号)<br>那么接下来涉及的东西就已经不属于博弈论了XD</p>
@@ -392,7 +393,7 @@ SG函数大部分博弈游戏都可以看做一个图上的游戏，两人轮流
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h2 id="例题3-luoguP2197"><a href="#例题3-luoguP2197" class="headerlink" title="例题3 luoguP2197"></a>例题3 luoguP2197</h2><p>你 妈 的 久 等 了<br>甲，乙两个人玩Nim取石子游戏<br>nim游戏的规则是这样的：地上有n堆石子（每堆石子数量小于10000），每人每次可从任意一堆石子里取出任意多枚石子扔掉，可以取完，不能不取。每次只能从一堆里取。最后没石子可取的人就输了。假如甲是先手，且告诉你这n堆石子的数量，他想知道是否存在先手必胜的策略。<br>比起上一题这题不知道水到哪里去了<br>对于一个状态{a1,a2,a3…an}<br>其SG函数定义为a1^a2^…^an<br>则SG(x)为0时，先手必胜<br>首先状态{0,0,0…0}必胜<br>对于任意一个SG(x)!=0都能变成<br>SG(y)=0<br>证明设SG(x)最后高位为a<br>则可以把a直接抹除或把a变成任意个更低的位数<br>例如现在1+2+4是异或出来的结果那么4就可以变成1+2（也就是减少1）<br>那么一直这么做，最后总会到达最小的那个异或为0的状态，也就是{0,0,0,0…0}（因为石子数量是递减的QAQ）</p>
+<h2 id="例题3-luoguP2197"><a href="#例题3-luoguP2197" class="headerlink" title="例题3 luoguP2197"></a>例题3 luoguP2197</h2><p>你 妈 的 久 等 了<br>甲，乙两个人玩Nim取石子游戏<br>nim游戏的规则是这样的：地上有n堆石子（每堆石子数量小于10000），每人每次可从任意一堆石子里取出任意多枚石子扔掉，可以取完，不能不取。每次只能从一堆里取。最后没石子可取的人就输了。假如甲是先手，且告诉你这n堆石子的数量，他想知道是否存在先手必胜的策略。<br>比起上一题这题不知道水到哪里去了<br>对于一个状态{a1,a2,a3…an}<br>我们的结论是a1^a2^…^an=0时<br>先手必胜<br>我们设集合函数f(X)=f({x1,x2,x3,x4…xn})=x1^x2^…^xn<br>首先状态{0,0,0…0}必胜<br>对于任意一个f(x)!=0都能变成<br>f(y)=0<br>证明设f(x)最高位为a<br>则可以把a直接抹除或把a变成任意个更低的位数<br>例如现在1+2+4是异或出来的结果那么4就可以变成1+2（也就是减少1）<br>那么一直这么做，最后总会到达最小的那个异或为0的状态，也就是{0,0,0,0…0}（因为石子数量是递减的QAQ）<br>但其实这样的证明很不SG，这样子证明出来的东西不能叫SG函数，只能是一个函数<br>我们可以把这个问题看作把很多个并列的取石子游戏，显然，对于一堆石子x<br>sg(x)=x(x可以取1个到x个也就是1——x-1都可以取，根据SG函数的定义就是x了)<br>然后更具基本定理直接把每堆石子异或起来就好了QAQ</p>
 <pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 <span class="token keyword">int</span> ans<span class="token punctuation">,</span>n<span class="token punctuation">;</span>
@@ -426,7 +427,64 @@ SG函数大部分博弈游戏都可以看做一个图上的游戏，两人轮流
 5 1000
 */</span>
 </code></pre>
-
+<h2 id="例题4-阶梯nim游戏"><a href="#例题4-阶梯nim游戏" class="headerlink" title="例题4 阶梯nim游戏"></a>例题4 阶梯nim游戏</h2><p>好像是转换比较多的游戏，变式比较多<br>首先是对阶梯博弈的阐述，博弈在一列阶梯上进行，每个阶梯上放着一些石子，两个人进行阶梯博弈，每一步则是将一个集体上的至少一个石子移到前面去最后没有石子可以移动的人输<br>类似nim游戏的，我们将最简单的必胜局拿出来发现是只有1号位上有石子，最简单的必败局面就是只有0位上有石子<br>我们考虑是否存在一个能被维护的性质（即无论后手如何行动先手都可以对其进行操作使其依旧满足性质，这里不知道用什么词所以就用维护了），因为nim游戏的状态是递减的，所以最后一定能到达最小的满足该性质的必败态<br>我们考虑只有3个阶梯的博弈，可以发现偶数位上无论有几位都对最终答案没有影响，所以这个游戏只和奇数位上的石子数目有关，那我们直接维护奇数位上的必败态，也就是异或和为0，移动偶数就是给奇数加，移动奇数就是给奇数减，减的证明已经证明过了，加的证明同理不再赘述（就是懒）</p>
+<h3 id="变式1-luoguP2575"><a href="#变式1-luoguP2575" class="headerlink" title="变式1 luoguP2575"></a>变式1 luoguP2575</h3><p>题意自己去看原题（<br>每一行看做一个独立的游戏，可以发现<br>我们的最终状态就是棋子全部扔到最右边，所以说这和阶梯nim中吧所有棋子扔到最左边很像<br>我们将黑色棋子看做石子，空格就是每个阶梯间的分隔，每次最多只有一个空格被移动（移动棋子只会替换掉一个空格）<br>然后根据SG函数的基本定理就理所当然的把每一行的SG函数值异或起来了</p>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token keyword">int</span> T<span class="token punctuation">;</span>
+<span class="token keyword">int</span> n<span class="token punctuation">,</span>cnt<span class="token punctuation">[</span><span class="token number">29</span><span class="token punctuation">]</span><span class="token punctuation">,</span>a<span class="token punctuation">[</span><span class="token number">29</span><span class="token punctuation">]</span><span class="token punctuation">,</span>sg<span class="token punctuation">[</span><span class="token number">29</span><span class="token punctuation">]</span><span class="token punctuation">,</span>fz<span class="token punctuation">[</span><span class="token number">29</span><span class="token punctuation">]</span><span class="token punctuation">,</span>len<span class="token punctuation">,</span>ans<span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>T<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>T<span class="token operator">--</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ans<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> ii<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>ii<span class="token operator">&lt;=</span>n<span class="token punctuation">;</span>ii<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">memset</span><span class="token punctuation">(</span>cnt<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>cnt<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>len<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">&lt;=</span>len<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                cnt<span class="token punctuation">[</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>    
+            <span class="token punctuation">}</span>
+            <span class="token keyword">int</span> tot<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>i<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">,</span>fg<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token keyword">while</span><span class="token punctuation">(</span>cnt<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> i<span class="token operator">--</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token punctuation">;</span>i<span class="token punctuation">;</span><span class="token operator">--</span>i<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>cnt<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>ans<span class="token operator">^</span><span class="token operator">=</span><span class="token punctuation">(</span>fg<span class="token operator">?</span>tot<span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>fg<span class="token operator">^</span><span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>tot<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+                <span class="token keyword">else</span> <span class="token operator">++</span>tot<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            ans<span class="token operator">^</span><span class="token operator">=</span><span class="token punctuation">(</span>fg<span class="token operator">?</span>tot<span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>ans<span class="token punctuation">)</span> cout<span class="token operator">&lt;&lt;</span><span class="token string">"YES"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+        <span class="token keyword">else</span> cout<span class="token operator">&lt;&lt;</span><span class="token string">"NO"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>     
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="变式2"><a href="#变式2" class="headerlink" title="变式2"></a>变式2</h2><p>有N堆石子，除了第一堆外，每堆石子个数都不少于前一堆的石子个数。两人轮流操作每次操作可以从一堆石子中移走任意多石子，但是要保证操作后仍然满足初始时的条件谁没有石子可移时输掉游戏。问先手是否必胜。<br>这题挺可惜的，没有自己想过，直接被其他blog剧透了QAQ<br>这题时真的很妙啊<br>我们将石子数组差分，每次去掉1颗石子相当于左边加一，右边减一（除了边界处）<br>也就是一个边界可以把石子扔掉的阶梯博弈<br>但把边界石子扔掉是没有影响的，若边界是奇数，扔掉等价于移到偶数位上<br>偶数位则根本没有影响</p>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token keyword">int</span> n<span class="token punctuation">,</span>a<span class="token punctuation">[</span><span class="token number">100100</span><span class="token punctuation">]</span><span class="token punctuation">,</span>b<span class="token punctuation">[</span><span class="token number">100100</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> T<span class="token punctuation">,</span>i<span class="token punctuation">,</span>t<span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>T<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>T<span class="token operator">--</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        t<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">&lt;=</span>n<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>b<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-</span>a<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span>n<span class="token punctuation">;</span>i<span class="token operator">>=</span><span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">-</span><span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span> t<span class="token operator">^</span><span class="token operator">=</span>b<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"TAK\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">else</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"NIE\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="例题5"><a href="#例题5" class="headerlink" title="例题5"></a>例题5</h2>
             </div>
             <hr>
 
@@ -506,8 +564,8 @@ SG函数大部分博弈游戏都可以看做一个图上的游戏，两人轮流
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">(本片文章将充斥着大量的大小写不分，括号中英文不分，请谅解)
-SG函数大部分博弈游戏都可以看做一个图上的游戏，两人轮流在图上行走到不同的状态，并且是一个递增有界的图（就是无论你怎么走，最后一定会停下来，而不是停不下来的希望之花），然而有些状</div>
+                    <div class="summary">(本篇文章将充斥着大量的大小写不分，括号中英文不分，请谅解)本篇blog推荐的题目均是可以证明的题解（不能证明的SG函数有什么存在的必要吗（恼））
+ICGICG就是公平组合游戏，其满足有两个玩家轮流行动。双方的游戏方式一致。双方均知道游戏的</div>
                     <div class="publish-info">
                             <span class="publish-date">
                                 <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-26
@@ -532,12 +590,12 @@ SG函数大部分博弈游戏都可以看做一个图上的游戏，两人轮流
                         <span class="chip bg-color">学习笔记</span>
                     </a>
                     
-                    <a href="/tags/博弈论/" target="_blank">
-                        <span class="chip bg-color">博弈论</span>
-                    </a>
-                    
                     <a href="/tags/数论/" target="_blank">
                         <span class="chip bg-color">数论</span>
+                    </a>
+                    
+                    <a href="/tags/博弈论/" target="_blank">
+                        <span class="chip bg-color">博弈论</span>
                     </a>
                     
                 </div>
@@ -654,7 +712,7 @@ SG函数大部分博弈游戏都可以看做一个图上的游戏，两人轮流
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">21.5k</span>
+                <span class="white-color">22.8k</span>
             
 
             
