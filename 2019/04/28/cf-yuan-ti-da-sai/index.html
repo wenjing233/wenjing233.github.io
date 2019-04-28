@@ -4,8 +4,8 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="归档: 2019/2, wenjing233的小站">
-    <meta name="description" content="归档: 2019/2 | wenjing233的小站">
+    <meta name="keywords" content="CF 原题大赛, wenjing233的小站">
+    <meta name="description" content="CF545C Woodcutters贪心就是尽可能往左倒无法向左倒，则尽量往右倒第一个准则很好理解，但另一个则让人费解如果向右倒的话，则再右边的那颗树则也可能会向右倒，这样可能会有人会想这样会不会让答案不优那么我们假设这样之后，我们让一颗树">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>归档: 2019/2 | wenjing233的小站</title>
+    <title>CF 原题大赛 | wenjing233的小站</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -272,269 +272,307 @@
     </nav>
 </header>
 
-<div class="bg-cover  about-cover" style="background-image: url('/medias/cover.jpg')">
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container">
         <div class="row">
-            <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
+            <div class="col s12 m12 l12">
                 <div class="brand">
-                    <div class="title center-align">
-                    
-                        MY BLOG
-                    
-                    </div>
-
-                    <div class="description center-align">
-                    
-                        所谓觉悟，就是在黑暗的荒野上开辟出一条理当前进的光明大道
-                    
+                    <div class="description center-align post-title">
+                        CF 原题大赛
                     </div>
                 </div>
             </div>
         </div>
-        
     </div>
 </div>
+
+
+
+<main class="container content">
+
+    
+    <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/模拟赛总结/" target="_blank">
+                                <span class="chip bg-color">模拟赛总结</span>
+                            </a>
+                        
+                            <a href="/tags/hgoi/" target="_blank">
+                                <span class="chip bg-color">hgoi</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/模拟赛总结/" class="post-category" target="_blank">
+                                模拟赛总结
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-04-28
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        322
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        1 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="CF545C-Woodcutters"><a href="#CF545C-Woodcutters" class="headerlink" title="CF545C Woodcutters"></a>CF545C Woodcutters</h2><p>贪心就是尽可能往左倒<br>无法向左倒，则尽量往右倒<br>第一个准则很好理解，但另一个则让人费解<br>如果向右倒的话，则再右边的那颗树则也可能会向右倒，这样可能会有人会想这样会不会让答案不优<br>那么我们假设这样之后，我们让一颗树既不能向左也不能向右，也就是造成了负面影响，因为一棵树无论倒不倒，都会让他所在的点无法被接触到，所以说这棵树停在原地等价于向左倒，也就是我们只是面对二择，要么左边，要么右边，对于答案而言是等价的。<br>故此贪心策略是正确的<br>Q·E·D</p>
+<h2 id="Bear-and-Prime-100"><a href="#Bear-and-Prime-100" class="headerlink" title="Bear and Prime 100"></a>Bear and Prime 100</h2><p>交互题，让你猜数字是质数还是合数<br>你可以询问这个数能否被x整除<br>查询次数最多为20次<br>数字范围在【2，100】<br>显然100以内的合数都至少包含2——7中的质数一个，因为不包含这些质数的最小合数是11<em>13=143<br>那么先枚举这些（4个） 最差是去找94=2</em>47 要枚举玩一个2后再从2枚举到47（15个）<br>刚好20次呢XD</p>
+
+            </div>
+            <hr>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="http://wenjing233.github.io" class="b-link-green">wenjing233的小站</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/04/28/cf-yuan-ti-da-sai/" class="b-link-green">CF 原题大赛</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'f6af4406db689965aa5e',
+        clientSecret: 'af82898692d2e6d882cafea603c11d2813852a84',
+        repo: 'Gittalk',
+        owner: 'wenjing233',
+        admin: ["wenjing233"],
+        id: '2019-04-28T20-18-58',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2019/04/28/cf-yuan-ti-da-sai/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="CF 原题大赛">
+                        
+                        <span class="card-title">CF 原题大赛</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">CF545C Woodcutters贪心就是尽可能往左倒无法向左倒，则尽量往右倒第一个准则很好理解，但另一个则让人费解如果向右倒的话，则再右边的那颗树则也可能会向右倒，这样可能会有人会想这样会不会让答案不优那么我们假设这样之后，我们让一颗树</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/模拟赛总结/" class="post-category" target="_blank">
+                                    模拟赛总结
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/模拟赛总结/" target="_blank">
+                        <span class="chip bg-color">模拟赛总结</span>
+                    </a>
+                    
+                    <a href="/tags/hgoi/" target="_blank">
+                        <span class="chip bg-color">hgoi</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/04/01/po3764-ti-jie/">
+                    <div class="card-image">
+                        
+                        <img src="https://i.loli.net/2019/04/01/5ca1f642a3bbe.jpg" class="responsive-img" alt="十分妙的一道题">
+                        
+                        <span class="card-title">十分妙的一道题</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">##题意给定一个n个结点的树，树上每条边都有一个权值。从树中选择两个点 x 和y，把从x到y的路径上的所有边权值xor起来，得到的结果最大是多少？注意结点编号从0开始
+##问题转换我们可以发现如果一条路径被异或了两次，是相当于没有异或的也就</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/题解/" class="post-category" target="_blank">
+                                    题解
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/题解/" target="_blank">
+                        <span class="chip bg-color">题解</span>
+                    </a>
+                    
+                    <a href="/tags/字典树，奇妙思路/" target="_blank">
+                        <span class="chip bg-color">字典树，奇妙思路</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
 
 <script>
-// Dynamically switch banner pictures every day.
-$('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: wenjing233的小站<br />'
+            + '作者: wenjing233<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '抄代码是不好的哦，转文章不放出处也是不好的哦。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
 </script>
 
-<main class="content">
-
     
-
-    
-
-    <div id="cd-timeline" class="container">
-        
-        <div class="cd-timeline-block">
-
-            
-            
-            
-            <div class="cd-timeline-img year" data-aos="zoom-in-up">
-                <a href="/archives/2019">2019</a>
-            </div>
-            
-
-            
-            
-            
-            <div class="cd-timeline-img month" data-aos="zoom-in-up">
-                <a href="/archives/2019/02">02</a>
-            </div>
-            
-
-            
-            <div class="cd-timeline-img day" data-aos="zoom-in-up">
-                <span>21</span>
-            </div>
-            <article class="cd-timeline-content" data-aos="fade-up">
-                <div class="article col s12 m6">
-                    <div class="card">
-                        <a href="/2019/02/21/2019-2-17-zong-jie/">
-                            <div class="card-image">
-                                
-                                
-                                <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="2019 2 17 总结">
-                                
-                                <span class="card-title">2019 2 17 总结</span>
-                            </div>
-                        </a>
-                        <div class="card-content article-content">
-                            <div class="summary">
-                                
-                                    T1题意:给出n，求1到n内有几个数与n的最大公约数不为1（n&lt;=10000000）直接分解质因数容斥即可
-#include&lt;bits/stdc++
-                                
-                            </div>
-                            <div class="publish-info">
-                                <span class="publish-date">
-                                    <i class="fa fa-clock-o fa-fw icon-date"></i>2019-02-21
-                                </span>
-                                <span class="publish-author">
-                                    
-                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                    
-                                    <a href="/categories/模拟赛总结/" class="post-category" target="_blank">
-                                    模拟赛总结
-                                    </a>
-                                    
-                                    
-                                </span>
-                            </div>
-                        </div>
-
-                        
-                        <div class="card-action article-tags">
-                            
-                            <a href="/tags/模拟赛总结/"><span class="chip bg-color">模拟赛总结</span></a>
-                            
-                            <a href="/tags/hgoi/"><span class="chip bg-color">hgoi</span></a>
-                            
-                        </div>
-                        
-                    </div>
-                </div>
-            </article>
-        </div>
-        
-        <div class="cd-timeline-block">
-
-            
-            
-
-            
-            
-
-            
-            <div class="cd-timeline-img day" data-aos="zoom-in-up">
-                <span>21</span>
-            </div>
-            <article class="cd-timeline-content" data-aos="fade-up">
-                <div class="article col s12 m6">
-                    <div class="card">
-                        <a href="/2019/02/21/2019-2-18-zong-jie/">
-                            <div class="card-image">
-                                
-                                
-                                <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="2019.2.18总结">
-                                
-                                <span class="card-title">2019.2.18总结</span>
-                            </div>
-                        </a>
-                        <div class="card-content article-content">
-                            <div class="summary">
-                                
-                                    又是水题大赛和失误的一天
-T1边界出错，二分打错
-T4初始值赋错
-没什么好讲的
-T1上升子序列
-T2spfa
-T3单调队列
-T4背包dp
-题意
-T1原序列将卡片
-                                
-                            </div>
-                            <div class="publish-info">
-                                <span class="publish-date">
-                                    <i class="fa fa-clock-o fa-fw icon-date"></i>2019-02-21
-                                </span>
-                                <span class="publish-author">
-                                    
-                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                    
-                                    <a href="/categories/模拟赛总结/" class="post-category" target="_blank">
-                                    模拟赛总结
-                                    </a>
-                                    
-                                    
-                                </span>
-                            </div>
-                        </div>
-
-                        
-                        <div class="card-action article-tags">
-                            
-                            <a href="/tags/模拟赛总结/"><span class="chip bg-color">模拟赛总结</span></a>
-                            
-                            <a href="/tags/hgoi/"><span class="chip bg-color">hgoi</span></a>
-                            
-                        </div>
-                        
-                    </div>
-                </div>
-            </article>
-        </div>
-        
-        <div class="cd-timeline-block">
-
-            
-            
-
-            
-            
-
-            
-            <div class="cd-timeline-img day" data-aos="zoom-in-up">
-                <span>21</span>
-            </div>
-            <article class="cd-timeline-content" data-aos="fade-up">
-                <div class="article col s12 m6">
-                    <div class="card">
-                        <a href="/2019/02/21/hello-world/">
-                            <div class="card-image">
-                                
-                                <img src="http://wx4.sinaimg.cn/mw690/0060lm7Tly1g0n593gn1rj31hc0u0e35.jpg" class="responsive-img" alt="hello world">
-                                
-                                <span class="card-title">hello world</span>
-                            </div>
-                        </a>
-                        <div class="card-content article-content">
-                            <div class="summary">
-                                
-                                    本博客建于2019 2 21主要更新题解和算法学习笔记欢迎交换友链！
-
-                                
-                            </div>
-                            <div class="publish-info">
-                                <span class="publish-date">
-                                    <i class="fa fa-clock-o fa-fw icon-date"></i>2019-02-21
-                                </span>
-                                <span class="publish-author">
-                                    
-                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                    
-                                    <a href="/categories/生活记录/" class="post-category" target="_blank">
-                                    生活记录
-                                    </a>
-                                    
-                                    
-                                </span>
-                            </div>
-                        </div>
-
-                        
-                        <div class="card-action article-tags">
-                            
-                            <a href="/tags/杂七杂八的/"><span class="chip bg-color">杂七杂八的</span></a>
-                            
-                        </div>
-                        
-                    </div>
-                </div>
-            </article>
-        </div>
-        
-    </div>
 
 </main>
-
-
-<div class="container paging">
-    <div class="row">
-        <div class="col s6 m4 l4">
-            
-            <a href="/archives/2019/02/" class="left btn-floating btn-large waves-effect waves-light bg-color">
-                <i class="fa fa-angle-left"></i>
-            </a>
-            
-        </div>
-        <div class="page-info col m4 l4 hide-on-small-only">
-            <div class="center-align b-text-gray">2 / 2</div>
-        </div>
-        <div class="col s6 m4 l4">
-            
-            <a class="right btn-floating btn-large disabled">
-                <i class="fa fa-angle-right"></i>
-            </a>
-            
-        </div>
-    </div>
-</div>
 
 
 <footer class="page-footer bg-color">

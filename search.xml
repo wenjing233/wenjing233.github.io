@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>CF 原题大赛</title>
+      <link href="/2019/04/28/cf-yuan-ti-da-sai/"/>
+      <url>/2019/04/28/cf-yuan-ti-da-sai/</url>
+      
+        <content type="html"><![CDATA[<h2 id="CF545C-Woodcutters"><a href="#CF545C-Woodcutters" class="headerlink" title="CF545C Woodcutters"></a>CF545C Woodcutters</h2><p>贪心就是尽可能往左倒<br>无法向左倒，则尽量往右倒<br>第一个准则很好理解，但另一个则让人费解<br>如果向右倒的话，则再右边的那颗树则也可能会向右倒，这样可能会有人会想这样会不会让答案不优<br>那么我们假设这样之后，我们让一颗树既不能向左也不能向右，也就是造成了负面影响，因为一棵树无论倒不倒，都会让他所在的点无法被接触到，所以说这棵树停在原地等价于向左倒，也就是我们只是面对二择，要么左边，要么右边，对于答案而言是等价的。<br>故此贪心策略是正确的<br>Q·E·D</p><h2 id="Bear-and-Prime-100"><a href="#Bear-and-Prime-100" class="headerlink" title="Bear and Prime 100"></a>Bear and Prime 100</h2><p>交互题，让你猜数字是质数还是合数<br>你可以询问这个数能否被x整除<br>查询次数最多为20次<br>数字范围在【2，100】<br>显然100以内的合数都至少包含2——7中的质数一个，因为不包含这些质数的最小合数是11<em>13=143<br>那么先枚举这些（4个） 最差是去找94=2</em>47 要枚举玩一个2后再从2枚举到47（15个）<br>刚好20次呢XD</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 模拟赛总结 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 模拟赛总结 </tag>
+            
+            <tag> hgoi </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>十分妙的一道题</title>
       <link href="/2019/04/01/po3764-ti-jie/"/>
       <url>/2019/04/01/po3764-ti-jie/</url>
@@ -136,9 +163,9 @@
             
             <tag> 题解 </tag>
             
-            <tag> luogu </tag>
-            
             <tag> 贪心 </tag>
+            
+            <tag> luogu </tag>
             
             <tag> 图论 </tag>
             
@@ -165,9 +192,9 @@
       
         <tags>
             
-            <tag> 题解 </tag>
-            
             <tag> 游记 </tag>
+            
+            <tag> 题解 </tag>
             
             <tag> ACM </tag>
             
@@ -229,9 +256,9 @@
             
             <tag> 题解 </tag>
             
-            <tag> 贪心 </tag>
-            
             <tag> poj </tag>
+            
+            <tag> 贪心 </tag>
             
             <tag> 平面几何 </tag>
             
@@ -262,9 +289,9 @@
             
             <tag> 题解 </tag>
             
-            <tag> luogu </tag>
-            
             <tag> 问题转化 </tag>
+            
+            <tag> luogu </tag>
             
             <tag> bzoj </tag>
             
@@ -394,9 +421,9 @@
             
             <tag> 题解 </tag>
             
-            <tag> luogu </tag>
-            
             <tag> 贪心 </tag>
+            
+            <tag> luogu </tag>
             
             <tag> 非正解做法 </tag>
             
