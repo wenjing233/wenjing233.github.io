@@ -4,9 +4,9 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="十分妙的一道题, wenjing233的小站">
-    <meta name="description" content="##题意给定一个n个结点的树，树上每条边都有一个权值。从树中选择两个点 x 和y，把从x到y的路径上的所有边权值xor起来，得到的结果最大是多少？注意结点编号从0开始
-##问题转换我们可以发现如果一条路径被异或了两次，是相当于没有异或的也就">
+    <meta name="keywords" content="poj3764题解, wenjing233的小站">
+    <meta name="description" content="题意给定一个n个结点的树，树上每条边都有一个权值。从树中选择两个点 x 和y，把从x到y的路径上的所有边权值xor起来，得到的结果最大是多少？注意结点编号从0开始
+问题转换我们可以发现如果一条路径被异或了两次，是相当于没有异或的也就是说树上">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>十分妙的一道题 | wenjing233的小站</title>
+    <title>poj3764题解 | wenjing233的小站</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -283,7 +283,7 @@
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        十分妙的一道题
+                        poj3764题解
                     </div>
                 </div>
             </div>
@@ -363,8 +363,8 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>##题意<br>给定一个n个结点的树，树上每条边都有一个权值。从树中选择两个点 x 和y，把从x到y的路径上的所有边权值xor起来，得到的结果最大是多少？注意结点编号从0开始</p>
-<p>##问题转换<br>我们可以发现如果一条路径被异或了两次，是相当于没有异或的<br>也就是说树上任意一条路径的异或值都可以转化为经过根的两条路径的异或值（也就是将其LCA与根连一条边）<br>于是乎，我们从根做一遍dfs后，问题就变成了这样：<br>给定n个数，从中取两个数的异或和为多大<br>我们考虑对于一个数，异或什么数最大？<br>显然是对2^31-1取反，显然这是不可能的，是会有冲突的<br>所以我们可以用贪心的思想解决这个问题<br>我们可以发现2^n满足2^n&gt;2^0+2^1…+2^(n-1)<br>所以说我们优先考虑当前最高位存不存在一个可以取反的数字即可<br>不可以就往下走，我们发现这个问题可以用字典树解决，于是乎，建立一颗01字典树<br>插入n个数<br>每次查询只要查询32位即可</p>
+                <h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>给定一个n个结点的树，树上每条边都有一个权值。从树中选择两个点 x 和y，把从x到y的路径上的所有边权值xor起来，得到的结果最大是多少？注意结点编号从0开始</p>
+<h2 id="问题转换"><a href="#问题转换" class="headerlink" title="问题转换"></a>问题转换</h2><p>我们可以发现如果一条路径被异或了两次，是相当于没有异或的<br>也就是说树上任意一条路径的异或值都可以转化为经过根的两条路径的异或值（也就是将其LCA与根连一条边）<br>于是乎，我们从根做一遍dfs后，问题就变成了这样：<br>给定n个数，从中取两个数的异或和为多大<br>我们考虑对于一个数，异或什么数最大？<br>显然是对2^31-1取反，显然这是不可能的，是会有冲突的<br>所以我们可以用贪心的思想解决这个问题<br>我们可以发现2^n满足2^n&gt;2^0+2^1…+2^(n-1)<br>所以说我们优先考虑当前最高位存不存在一个可以取反的数字即可<br>不可以就往下走，我们发现这个问题可以用字典树解决，于是乎，建立一颗01字典树<br>插入n个数<br>每次查询只要查询32位即可</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;algorithm></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
@@ -441,7 +441,7 @@
                     </span>
                     <a href="http://wenjing233.github.io" class="b-link-green">wenjing233的小站</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/04/01/po3764-ti-jie/" class="b-link-green">十分妙的一道题</a>
+                    <a href="/2019/04/01/po3764-ti-jie/" class="b-link-green">poj3764题解</a>
                 </p>
             </div>
         </div>
@@ -488,7 +488,7 @@
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/04/28/cf-yuan-ti-da-sai/">
+                <a href="/2019/04/28/cf-yuan-ti-da-sai-2/">
                     <div class="card-image">
                         
                         
@@ -498,7 +498,9 @@
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">CF545C Woodcutters贪心就是尽可能往左倒无法向左倒，则尽量往右倒第一个准则很好理解，但另一个则让人费解如果向右倒的话，则再右边的那颗树则也可能会向右倒，这样可能会有人会想这样会不会让答案不优那么我们假设这样之后，我们让一颗树</div>
+                    <div class="summary">CF849A显然，奇数乘奇数还是奇数，如果两边是偶数，无论怎么划分，他永远都在边界上，是不合法的
+CF849B第一个点要么自己一人，要么肯定和另一个点在一起，枚举即可O(n*n)
+CF848A显然每个点合并时都要和其他点计数一次，所以是n*</div>
                     <div class="publish-info">
                         <span class="publish-date">
                             <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-28
@@ -540,16 +542,13 @@
                 <a href="/2019/03/29/zhu-xi-shu-xue-xi-bi-ji/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="主席树学习笔记">
+                        <img src="https://i.loli.net/2019/05/10/5cd527565438d.gif" class="responsive-img" alt="主席树学习笔记">
                         
                         <span class="card-title">主席树学习笔记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">
-title: 主席树学习笔记date: 2019-03-29 10:04:51tags: [学习笔记,数据结构,主席树]categories: 学习笔记
-img: 主席树学习笔记主席树就是可持久化的线段树，可以轻松的访问历史版本暴力的可持</div>
+                    <div class="summary">主席树学习笔记主席树就是可持久化的线段树，可以轻松的访问历史版本暴力的可持久化线段树就是每一次修改都重新把原来的线段树copy过来然后修改，复杂度爆炸但线段树有一个优美的性质就是我们发现每次修改只会修改logn段区间，也就是说其他nlogn</div>
                     <div class="publish-info">
                             <span class="publish-date">
                                 <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-29
@@ -642,7 +641,7 @@ img: 主席树学习笔记主席树就是可持久化的线段树，可以轻松
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">25.2k</span>
+                <span class="white-color">25.4k</span>
             
 
             

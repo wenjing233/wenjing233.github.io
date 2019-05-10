@@ -5,9 +5,7 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
     <meta name="keywords" content="主席树学习笔记, wenjing233的小站">
-    <meta name="description" content="
-title: 主席树学习笔记date: 2019-03-29 10:04:51tags: [学习笔记,数据结构,主席树]categories: 学习笔记
-img: 主席树学习笔记主席树就是可持久化的线段树，可以轻松的访问历史版本暴力的可持">
+    <meta name="description" content="主席树学习笔记主席树就是可持久化的线段树，可以轻松的访问历史版本暴力的可持久化线段树就是每一次修改都重新把原来的线段树copy过来然后修改，复杂度爆炸但线段树有一个优美的性质就是我们发现每次修改只会修改logn段区间，也就是说其他nlogn">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -278,7 +276,7 @@ img: 主席树学习笔记主席树就是可持久化的线段树，可以轻松
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('https://i.loli.net/2019/05/10/5cd527565438d.gif')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -368,9 +366,7 @@ img: 主席树学习笔记主席树就是可持久化的线段树，可以轻松
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <hr>
-<p>title: 主席树学习笔记<br>date: 2019-03-29 10:04:51<br>tags: [学习笔记,数据结构,主席树]<br>categories: 学习笔记</p>
-<h2 id="img"><a href="#img" class="headerlink" title="img: "></a>img: </h2><h2 id="主席树学习笔记"><a href="#主席树学习笔记" class="headerlink" title="主席树学习笔记"></a>主席树学习笔记</h2><p>主席树就是可持久化的线段树，可以轻松的访问历史版本<br>暴力的可持久化线段树就是每一次修改都重新把原来的线段树copy过来然后修改，复杂度爆炸<br>但线段树有一个优美的性质就是我们发现每次修改只会修改logn段区间，也就是说其他nlogn段区间可以直接copy上一个历史版本的区间位置<br>既然知道这个思想了，那我们就可以上图了(copy的毕竟不用修改(笑）<a href="https://www.luogu.org/blog/LonecharmRiver/zhu-xi-shu" title="图作者" target="_blank" rel="noopener">图作者</a>)<br><img src="https://images2018.cnblogs.com/blog/1282613/201805/1282613-20180527130913403-943508285.png" alt><br>这样我们就成功的把一这个数字插进来了（狂喜）（这里的区间[l,r]指的事值在[l,r]之间的数有几个）</p>
+                <h2 id="主席树学习笔记"><a href="#主席树学习笔记" class="headerlink" title="主席树学习笔记"></a>主席树学习笔记</h2><p>主席树就是可持久化的线段树，可以轻松的访问历史版本<br>暴力的可持久化线段树就是每一次修改都重新把原来的线段树copy过来然后修改，复杂度爆炸<br>但线段树有一个优美的性质就是我们发现每次修改只会修改logn段区间，也就是说其他nlogn段区间可以直接copy上一个历史版本的区间位置<br>既然知道这个思想了，那我们就可以上图了(copy的毕竟不用修改(笑）<a href="https://www.luogu.org/blog/LonecharmRiver/zhu-xi-shu" title="图作者" target="_blank" rel="noopener">图作者</a>)<br><img src="https://images2018.cnblogs.com/blog/1282613/201805/1282613-20180527130913403-943508285.png" alt><br>这样我们就成功的把一这个数字插进来了（狂喜）（这里的区间[l,r]指的事值在[l,r]之间的数有几个）</p>
 <h2 id="例题1"><a href="#例题1" class="headerlink" title="例题1"></a>例题1</h2><p>如题，给定N个整数构成的序列，将对于指定的闭区间查询其区间内的第K小值。<br>想必看到这样的题面，各位的内心一定事噔噔咚的⑧<br>我们考虑问题的简化版<br>区间一定事从1开始的且连续的<br>也就是说我们可以对区间排序然后离线做平衡树<br>但实际上我们可以在线用线段树做<br>我们对于每个[1,k] (1&lt;=k&lt;=n) 建一颗线段树<br>但显然每个区间之间只有1次修改，所以我们直接上主席树每次加一个点进去<br>对于区间[1,x]求第k大，我们只要像对平衡树一样左边小右边大，左边的数字个数如果小于k就往右边走，并且将k减去左边数字个数；左边比k打，则答案一定在左边 一直这样做直到k为0为止<br>那么现在区间的开头不是1了怎么办？显然的我们每个区间上需要记录的只是数字的个数而已，所以我们直接前缀和处理就好了[l,r]区间的值就是[1,r]-[1,l-1] (显然只要把查询的logn区间减一下就行（oi都学到这个地步了这点思想应该事有的⑧）)<br>分函数来康康</p>
 <h3 id="update"><a href="#update" class="headerlink" title="update"></a>update</h3><p>因为区间不是连续的，所以我们在存储线段树时，还要存贮他的两个儿子的下标</p>
 <pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">update</span><span class="token punctuation">(</span><span class="token keyword">int</span> now<span class="token punctuation">,</span><span class="token keyword">int</span> l<span class="token punctuation">,</span><span class="token keyword">int</span> r<span class="token punctuation">,</span><span class="token keyword">int</span> k<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//now时当前所在区间（历史版本的（准确的说事当前新区间所基于的那个历史版本））的下标 l,r字面意思 k就事要插入的数</span>
@@ -544,14 +540,14 @@ img: 主席树学习笔记主席树就是可持久化的线段树，可以轻松
                 <a href="/2019/04/01/po3764-ti-jie/">
                     <div class="card-image">
                         
-                        <img src="https://i.loli.net/2019/04/01/5ca1f642a3bbe.jpg" class="responsive-img" alt="十分妙的一道题">
+                        <img src="https://i.loli.net/2019/04/01/5ca1f642a3bbe.jpg" class="responsive-img" alt="poj3764题解">
                         
-                        <span class="card-title">十分妙的一道题</span>
+                        <span class="card-title">poj3764题解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">##题意给定一个n个结点的树，树上每条边都有一个权值。从树中选择两个点 x 和y，把从x到y的路径上的所有边权值xor起来，得到的结果最大是多少？注意结点编号从0开始
-##问题转换我们可以发现如果一条路径被异或了两次，是相当于没有异或的也就</div>
+                    <div class="summary">题意给定一个n个结点的树，树上每条边都有一个权值。从树中选择两个点 x 和y，把从x到y的路径上的所有边权值xor起来，得到的结果最大是多少？注意结点编号从0开始
+问题转换我们可以发现如果一条路径被异或了两次，是相当于没有异或的也就是说树上</div>
                     <div class="publish-info">
                         <span class="publish-date">
                             <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-01
@@ -693,7 +689,7 @@ ICGICG就是公平组合游戏，其满足有两个玩家轮流行动。双方�
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">25.2k</span>
+                <span class="white-color">25.4k</span>
             
 
             
