@@ -5,10 +5,10 @@
     
     <entry>
       <title>CF 原题大赛</title>
-      <link href="/2019/04/28/cf-yuan-ti-da-sai/"/>
-      <url>/2019/04/28/cf-yuan-ti-da-sai/</url>
+      <link href="/2019/04/28/cf-yuan-ti-da-sai-2/"/>
+      <url>/2019/04/28/cf-yuan-ti-da-sai-2/</url>
       
-        <content type="html"><![CDATA[<h2 id="CF545C-Woodcutters"><a href="#CF545C-Woodcutters" class="headerlink" title="CF545C Woodcutters"></a>CF545C Woodcutters</h2><p>贪心就是尽可能往左倒<br>无法向左倒，则尽量往右倒<br>第一个准则很好理解，但另一个则让人费解<br>如果向右倒的话，则再右边的那颗树则也可能会向右倒，这样可能会有人会想这样会不会让答案不优<br>那么我们假设这样之后，我们让一颗树既不能向左也不能向右，也就是造成了负面影响，因为一棵树无论倒不倒，都会让他所在的点无法被接触到，所以说这棵树停在原地等价于向左倒，也就是我们只是面对二择，要么左边，要么右边，对于答案而言是等价的。<br>故此贪心策略是正确的<br>Q·E·D</p><h2 id="Bear-and-Prime-100"><a href="#Bear-and-Prime-100" class="headerlink" title="Bear and Prime 100"></a>Bear and Prime 100</h2><p>交互题，让你猜数字是质数还是合数<br>你可以询问这个数能否被x整除<br>查询次数最多为20次<br>数字范围在【2，100】<br>显然100以内的合数都至少包含2——7中的质数一个，因为不包含这些质数的最小合数是11<em>13=143<br>那么先枚举这些（4个） 最差是去找94=2</em>47 要枚举玩一个2后再从2枚举到47（15个）<br>刚好20次呢XD</p>]]></content>
+        <content type="html"><![CDATA[<h2 id="CF849A"><a href="#CF849A" class="headerlink" title="CF849A"></a>CF849A</h2><p>显然，奇数乘奇数还是奇数，如果两边是偶数，无论怎么划分，他永远都在边界上，是不合法的</p><h2 id="CF849B"><a href="#CF849B" class="headerlink" title="CF849B"></a>CF849B</h2><p>第一个点要么自己一人，要么肯定和另一个点在一起，枚举即可O(n*n)</p><h2 id="CF848A"><a href="#CF848A" class="headerlink" title="CF848A"></a>CF848A</h2><p>显然每个点合并时都要和其他点计数一次，所以是n*(n-1)次，不能计数两次所以是除以2<br>然后关于复杂度的问题，累加到100000大概也就400左右，每次最多剩下400左右，然后400左右最多剩下20多，大概5,6次就行了</p><h2 id="CF385C"><a href="#CF385C" class="headerlink" title="CF385C"></a>CF385C</h2><p>开个桶，对于每个质数向上累加然后判断，统计，前缀和即可，复杂度和调和级数似乎有关系，反正是nlogn的</p>]]></content>
       
       
       <categories>
@@ -32,10 +32,10 @@
     
     <entry>
       <title>CF 原题大赛</title>
-      <link href="/2019/04/28/cf-yuan-ti-da-sai-2/"/>
-      <url>/2019/04/28/cf-yuan-ti-da-sai-2/</url>
+      <link href="/2019/04/28/cf-yuan-ti-da-sai/"/>
+      <url>/2019/04/28/cf-yuan-ti-da-sai/</url>
       
-        <content type="html"><![CDATA[<h2 id="CF849A"><a href="#CF849A" class="headerlink" title="CF849A"></a>CF849A</h2><p>显然，奇数乘奇数还是奇数，如果两边是偶数，无论怎么划分，他永远都在边界上，是不合法的</p><h2 id="CF849B"><a href="#CF849B" class="headerlink" title="CF849B"></a>CF849B</h2><p>第一个点要么自己一人，要么肯定和另一个点在一起，枚举即可O(n*n)</p><h2 id="CF848A"><a href="#CF848A" class="headerlink" title="CF848A"></a>CF848A</h2><p>显然每个点合并时都要和其他点计数一次，所以是n*(n-1)次，不能计数两次所以是除以2<br>然后关于复杂度的问题，累加到100000大概也就400左右，每次最多剩下400左右，然后400左右最多剩下20多，大概5,6次就行了</p><h2 id="CF385C"><a href="#CF385C" class="headerlink" title="CF385C"></a>CF385C</h2><p>开个桶，对于每个质数向上累加然后判断，统计，前缀和即可，复杂度和调和级数似乎有关系，反正是nlogn的</p>]]></content>
+        <content type="html"><![CDATA[<h2 id="CF545C-Woodcutters"><a href="#CF545C-Woodcutters" class="headerlink" title="CF545C Woodcutters"></a>CF545C Woodcutters</h2><p>贪心就是尽可能往左倒<br>无法向左倒，则尽量往右倒<br>第一个准则很好理解，但另一个则让人费解<br>如果向右倒的话，则再右边的那颗树则也可能会向右倒，这样可能会有人会想这样会不会让答案不优<br>那么我们假设这样之后，我们让一颗树既不能向左也不能向右，也就是造成了负面影响，因为一棵树无论倒不倒，都会让他所在的点无法被接触到，所以说这棵树停在原地等价于向左倒，也就是我们只是面对二择，要么左边，要么右边，对于答案而言是等价的。<br>故此贪心策略是正确的<br>Q·E·D</p><h2 id="Bear-and-Prime-100"><a href="#Bear-and-Prime-100" class="headerlink" title="Bear and Prime 100"></a>Bear and Prime 100</h2><p>交互题，让你猜数字是质数还是合数<br>你可以询问这个数能否被x整除<br>查询次数最多为20次<br>数字范围在【2，100】<br>显然100以内的合数都至少包含2——7中的质数一个，因为不包含这些质数的最小合数是11<em>13=143<br>那么先枚举这些（4个） 最差是去找94=2</em>47 要枚举玩一个2后再从2枚举到47（15个）<br>刚好20次呢XD</p>]]></content>
       
       
       <categories>
@@ -190,9 +190,9 @@
             
             <tag> 题解 </tag>
             
-            <tag> luogu </tag>
-            
             <tag> 贪心 </tag>
+            
+            <tag> luogu </tag>
             
             <tag> 图论 </tag>
             
@@ -283,9 +283,9 @@
             
             <tag> 题解 </tag>
             
-            <tag> 贪心 </tag>
-            
             <tag> poj </tag>
+            
+            <tag> 贪心 </tag>
             
             <tag> 平面几何 </tag>
             
@@ -316,9 +316,9 @@
             
             <tag> 题解 </tag>
             
-            <tag> luogu </tag>
-            
             <tag> 问题转化 </tag>
+            
+            <tag> luogu </tag>
             
             <tag> bzoj </tag>
             
@@ -349,9 +349,9 @@
             
             <tag> 题解 </tag>
             
-            <tag> luogu </tag>
-            
             <tag> 学习笔记 </tag>
+            
+            <tag> luogu </tag>
             
             <tag> 树状数组 </tag>
             
@@ -448,9 +448,9 @@
             
             <tag> 题解 </tag>
             
-            <tag> luogu </tag>
-            
             <tag> 贪心 </tag>
+            
+            <tag> luogu </tag>
             
             <tag> 非正解做法 </tag>
             
