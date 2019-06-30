@@ -4,8 +4,9 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="CF 原题大赛, wenjing233的小站">
-    <meta name="description" content="CF545C Woodcutters贪心就是尽可能往左倒无法向左倒，则尽量往右倒第一个准则很好理解，但另一个则让人费解如果向右倒的话，则再右边的那颗树则也可能会向右倒，这样可能会有人会想这样会不会让答案不优那么我们假设这样之后，我们让一颗树">
+    <meta name="keywords" content="杂题精选, wenjing233的小站">
+    <meta name="description" content="由于某些题目年代过于久远，代码不再附赠
+Walk给定n个点m条单向边，边权为1每个点有一定的点权，点权在2^20以内若vali&amp;amp;valj=valj则i到j之间还有一条长度为1的单向边现在从1出发，求到各个点的距离，若无法到达则为-1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>CF 原题大赛 | wenjing233的小站</title>
+    <title>杂题精选 | wenjing233的小站</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -276,13 +277,13 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('https://i.loli.net/2019/06/18/5d08999cebace42743.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        CF 原题大赛
+                        杂题精选
                     </div>
                 </div>
             </div>
@@ -304,12 +305,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/模拟赛总结/" target="_blank">
-                                <span class="chip bg-color">模拟赛总结</span>
-                            </a>
-                        
-                            <a href="/tags/hgoi/" target="_blank">
-                                <span class="chip bg-color">hgoi</span>
+                            <a href="/tags/题解/" target="_blank">
+                                <span class="chip bg-color">题解</span>
                             </a>
                         
                     </div>
@@ -320,8 +317,8 @@
                     <div class="post-cate">
                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/模拟赛总结/" class="post-category" target="_blank">
-                                模拟赛总结
+                            <a href="/categories/题解/" class="post-category" target="_blank">
+                                题解
                             </a>
                         
                     </div>
@@ -332,21 +329,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-04-28
+                    2019-06-30
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        322
+                        1.1k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        3 分
                     </div>
                     
                 
@@ -362,8 +359,18 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="CF545C-Woodcutters"><a href="#CF545C-Woodcutters" class="headerlink" title="CF545C Woodcutters"></a>CF545C Woodcutters</h2><p>贪心就是尽可能往左倒<br>无法向左倒，则尽量往右倒<br>第一个准则很好理解，但另一个则让人费解<br>如果向右倒的话，则再右边的那颗树则也可能会向右倒，这样可能会有人会想这样会不会让答案不优<br>那么我们假设这样之后，我们让一颗树既不能向左也不能向右，也就是造成了负面影响，因为一棵树无论倒不倒，都会让他所在的点无法被接触到，所以说这棵树停在原地等价于向左倒，也就是我们只是面对二择，要么左边，要么右边，对于答案而言是等价的。<br>故此贪心策略是正确的<br>Q·E·D</p>
-<h2 id="Bear-and-Prime-100"><a href="#Bear-and-Prime-100" class="headerlink" title="Bear and Prime 100"></a>Bear and Prime 100</h2><p>交互题，让你猜数字是质数还是合数<br>你可以询问这个数能否被x整除<br>查询次数最多为20次<br>数字范围在【2，100】<br>显然100以内的合数都至少包含2——7中的质数一个，因为不包含这些质数的最小合数是11<em>13=143<br>那么先枚举这些（4个） 最差是去找94=2</em>47 要枚举玩一个2后再从2枚举到47（15个）<br>刚好20次呢XD</p>
+                <p>由于某些题目年代过于久远，代码不再附赠</p>
+<h2 id="Walk"><a href="#Walk" class="headerlink" title="Walk"></a>Walk</h2><p>给定n个点m条单向边，边权为1<br>每个点有一定的点权，点权在2^20以内<br>若vali&amp;valj=valj则i到j之间还有一条长度为1的单向边<br>现在从1出发，求到各个点的距离，若无法到达则为-1</p>
+<p>我们将图分层<br>额外的边可以看作点与点权连边然后点权和点权连边最后再回到点<br>其中只有点权到点的边权设置为1，其余为0，岂可满足题目要求<br>显然这样的问题广搜即可，但我们要让边权为0的状态最优先；</p>
+<h2 id="access"><a href="#access" class="headerlink" title="access"></a>access</h2><p>有一棵 n 个节点，n-1 条边的树。树上有 m 条路径，定义两条路径相交仅当<br>这两条路径经过至少一个相同的点。小 D 想知道：从这 m 条路径中选择两条相交<br>的路径的方案数。</p>
+<p>显然，两条链相交，必然有一条链的最低点被另一条包含<br>那么我们将点用欧拉序标号，然后根据欧拉序的性质，我们可以用树状数组维护一个点到根的路径上包含了多少点<br>但我们要注意两个最浅点相交的情况，此时答案要减去i*i-C（i，2）次 （i为深度）</p>
+<h2 id="father"><a href="#father" class="headerlink" title="father"></a>father</h2><p>对字符串进行一系列的区间操作，然后让你输出字符串的前k个，经典的“倒着做”问题。<br>如果倒着一个个的去还原，复杂度是O(nk)的，可以拿到40分。<br>想到倒着做之后就可以考虑优化了。</p>
+<p>因为考虑到如果有操作[l,r]的话，那么[r+1,2r-l+1]的区间的答案是跟[l,r]区间的答案是一样的，所以可以用一个f[i]表示i这个点的答案是与哪个点的答案是一样的。<br>那么如何去处理这个点的答案是与那个点的答案一样的？<br>我考虑用暴力出奇迹，常数又大的线段树。<br>每个线段树存储这段区间内，独立点的个数（就是f[i]=0的点，及别的点的答案不影响这个点的答案），然后每次循环[r+1,2r-l+1]这段区间去更新线段树，每次找到第为r+1的点，因为1~r暂时被算作独立点，然后把r+1这个点修改为无效点，然后把这个点的位置q找出来，然后更新f[q]。当然f[q]的更新值也要用线段树来找。</p>
+<h2 id="小澳的方阵"><a href="#小澳的方阵" class="headerlink" title="小澳的方阵"></a>小澳的方阵</h2><p>给定一个矩阵，每次指定一行或者一列，在上面放上一种数字<br>问最终状态是什么<br>n,m&lt;=1000,n*m&lt;=10^5,q&lt;=10^6。</p>
+<p>我们发现n和m很少<br>将这个问题倒过来看<br>最后一个操作肯定不会被修改<br>且同一行同一列最多进行一次操作即可<br>也就是说我们最后要处理的操作只有 n+m个</p>
+<h2 id="成绩调研"><a href="#成绩调研" class="headerlink" title="成绩调研"></a>成绩调研</h2><p>石神显得有些心不在焉。最近恍恍惚惚，还请了两天假。<br>这一次的考试，学生的成绩分为k等，成绩单上按照学生的学号排序。此外，学校要抽一些同学的考<br>卷去调研，石神将这个任务委派给了你。 抽取的样本有如下要求：<br>学号连续的学生<br>得到1等的学生数量在[l_1,r_1]区间内<br>得到2等的学生数量在[l_2,r_2]区间内<br>现在请问有多少种抽取样本的方法。</p>
+<p>发现每一个l所对应r区间是连续而单调得<br>所以我们只要对上界和下界进行维护就好了<br>计算下界可以转化成：给定一个序列，支持修改某个位置上的数，维护全局最大值。<br>而且这里的修改比较特殊，一定是把数字改大，所以我们不需要用到任何数据结构。</p>
+<p>上界可以考虑把操作反过来，对于每一个确定得左边界，可以把有边界可以取到的范围大小累加</p>
 
             </div>
             <hr>
@@ -387,7 +394,7 @@
                     </span>
                     <a href="http://wenjing233.github.io" class="b-link-green">wenjing233的小站</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/04/28/cf-yuan-ti-da-sai/" class="b-link-green">CF 原题大赛</a>
+                    <a href="/2019/06/30/za-ti-jing-xuan/" class="b-link-green">杂题精选</a>
                 </p>
             </div>
         </div>
@@ -409,7 +416,7 @@
         repo: 'Gittalk',
         owner: 'wenjing233',
         admin: ["wenjing233"],
-        id: '2019-04-28T20-18-58',
+        id: '2019-06-30T11-10-18',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -432,44 +439,43 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/06/18/usaco-yuan-ti-da-sai/">
+                <a href="/2019/06/30/za-ti-jing-xuan/">
                     <div class="card-image">
                         
-                        <img src="https://i.loli.net/2019/06/18/5d08999936be133007.jpg" class="responsive-img" alt="USACO原题大赛">
                         
-                        <span class="card-title">USACO原题大赛</span>
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="杂题精选">
+                        
+                        <span class="card-title">杂题精选</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">T1有N个单词，每个单词长c个字，韵律为k，你要用这些单词作诗，每个诗句长度必须为len诗的某些句子必须是相同的韵脚这样的句子组不超过26个
-很显然的是，我们只要做一次背包DP推出每种韵脚，长度为len的句子有几个然后快速幂统计一下答案就好</div>
+                    <div class="summary">由于某些题目年代过于久远，代码不再附赠
+Walk给定n个点m条单向边，边权为1每个点有一定的点权，点权在2^20以内若vali&amp;valj=valj则i到j之间还有一条长度为1的单向边现在从1出发，求到各个点的距离，若无法到达则为-1</div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-18
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-30
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/模拟赛总结/" class="post-category" target="_blank">
-                                    模拟赛总结
+                            <a href="/categories/题解/" class="post-category" target="_blank">
+                                    题解
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/模拟赛总结/" target="_blank">
-                        <span class="chip bg-color">模拟赛总结</span>
-                    </a>
-                    
-                    <a href="/tags/hgoi/" target="_blank">
-                        <span class="chip bg-color">hgoi</span>
+                    <a href="/tags/题解/" target="_blank">
+                        <span class="chip bg-color">题解</span>
                     </a>
                     
                 </div>
@@ -483,21 +489,21 @@
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/04/28/cf-yuan-ti-da-sai-2/">
+                <a href="/2019/06/18/618-mo-ni-sai/">
                     <div class="card-image">
                         
-                        <img src="https://i.loli.net/2019/06/18/5d08999ff121e14987.jpg" class="responsive-img" alt="CF 原题大赛">
                         
-                        <span class="card-title">CF 原题大赛</span>
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="618模拟赛">
+                        
+                        <span class="card-title">618模拟赛</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">CF849A显然，奇数乘奇数还是奇数，如果两边是偶数，无论怎么划分，他永远都在边界上，是不合法的
-CF849B第一个点要么自己一人，要么肯定和另一个点在一起，枚举即可O(n*n)
-CF848A显然每个点合并时都要和其他点计数一次，所以是n*</div>
+                    <div class="summary">T1过于沙雕，直接跳过
+T2有一棵二叉树，我们定义如下：每个结点都有两个孩子：左孩子与右孩子；如果结点的值为整数 X,那么左孩子的值为 2X，右孩子的值为 2X+1；根的值定义为 1。现在，小 Y 同学在这棵二叉树上模拟步行。步行时由大写字</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-28
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-18
                             </span>
                         <span class="publish-author">
                             
